@@ -19,24 +19,26 @@
           <div class="logo fl">
             <img src="./assets/images/logo.svg" alt="">
           </div>
-          <ul class="navlist fl">
+          <ul class="navlist fl clearfix">
             <router-link tag="li" to="/home"><span>首页</span></router-link>
             <router-link tag="li" to="/news"><span>7*24快讯</span></router-link>
             <router-link tag="li" to="/quotation"><span>行情</span></router-link>
             <router-link tag="li" to="/information"><span>数据</span></router-link>
             <router-link tag="li" to="/activity"><span>活动</span></router-link>
             <router-link tag="li" to="/college"><span>学院</span></router-link>
-            <router-link tag="li" to="/specialcolumn"><span>专栏</span></router-link>
+            <router-link tag="li" to="/column"><span>专栏</span></router-link>
           </ul>
-          <ul class="userlist fr">
-            <li>
-              <i class="iconfont icon-yonghu"></i>
-            </li>
+          <ul class="userlist fr clearfix">
+            <li class="user"><i class="iconfont icon-yonghu"></i></li>
+            <router-link tag="li" to="/specialcolumn"><i class="iconfont icon-shuxie"></i><span>金色专栏</span></router-link>
+            <router-link tag="li" to="/login">
+              <input type="text" placeholder="搜索一下">
+              <i class="iconfont icon-sousuo"></i>
+            </router-link>
           </ul>
         </div>
       </div>
     </div>
-    <h1>这里公共部分</h1>
     <router-view/>
   </div>
 </template>
