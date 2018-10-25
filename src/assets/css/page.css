@@ -13,7 +13,47 @@
     max-width: 1170px;
     margin: 0 auto;
 }
+.news-swiper-container {
+    height: 35px;
+    overflow: hidden;
+}
 .header .news-flash .title {
     color: #f29702;
     font-size: 14px;
+}
+.header .news-flash .text {
+    font-size: 14px;
+}
+.header .nav-container {
+    background: #fff;
+    height: 76px;
+    width: 100%;
+    line-height: 76px;
+}
+.header .nav-userinfo {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+.header .nav-userinfo .navlist {
+    height: 100%;
+}
+.header .nav-userinfo .logo {
+    padding-top: 20px;
+    padding-right: 10px;
+}
+.nav-userinfo .navlist li {
+    float: left;
+    margin-left: 26px;
+}
+.nav-userinfo .navlist li span {
+    padding-bottom: 6px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+.nav-userinfo .navlist .active span {
+    border-bottom: 3px solid #F29700;
+    color: #F29700;
+}
+.nav-userinfo .navlist li span:hover {
+    color: #F29700;
 }
