@@ -29,12 +29,12 @@
             <router-link tag="li" to="/column"><span>专栏</span></router-link>
           </ul>
           <ul class="userlist fr clearfix">
-            <li class="user"><i class="iconfont icon-yonghu"></i></li>
+            <router-link tag="li" to="/login" class="user"><i class="iconfont icon-yonghu"></i></router-link>
             <router-link tag="li" to="/specialcolumn"><i class="iconfont icon-shuxie"></i><span>金色专栏</span></router-link>
-            <router-link tag="li" to="/login">
+            <li>
               <input type="text" placeholder="搜索一下">
               <i class="iconfont icon-sousuo"></i>
-            </router-link>
+            </li>
           </ul>
         </div>
       </div>

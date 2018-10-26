@@ -95,3 +95,17 @@
     font-size: 32px;
     font-weight: normal;
 }
+.swiper-pagination .swiper-pagination-bullet {
+    display: block;
+    margin: 5px 0;
+    background: #e9e9e9;
+    opacity: .2;
+}
+.swiper-pagination .swiper-pagination-bullet-active{
+    background: goldenrod;
+    opacity: .2;
+}
+.hover-box:hover .swiper-pagination .swiper-pagination-bullet-active,
+.hover-box:hover .swiper-pagination .swiper-pagination-bullet {
+    opacity: 1;
+}
