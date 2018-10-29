@@ -6,11 +6,8 @@
 }
 
 .clearfix:before,.clearfix:after{ 
-
     content:""; 
-
     display:table; 
-
 } 
 
 .clearfix:after{clear:both;} 
@@ -19,4 +16,26 @@
 
     *zoom:1;/*IE/7/6*/
 
+}
+.two-line {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.three-line {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.add-hover {
+    transition: color .3s;
+}
+.add-hover:hover {
+    color: #397BFF !important;
 }

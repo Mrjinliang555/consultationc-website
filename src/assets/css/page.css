@@ -4,13 +4,16 @@
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     padding-top: 113px;
+    min-width: 1170px;
   }
 #app .header {
     background: #e9e9e9;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    z-index: 9999;
   }
 #app .header .news-flash {
     height: 35px;

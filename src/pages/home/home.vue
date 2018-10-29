@@ -18,10 +18,63 @@
              </div>
            </div>
         </div>
-        <p>11</p>n
+        <div class="home-main-new">
+          <div class="container">
+              <div class="left-part">
+                <div class="banner">
+                  <div class="swiper-img">
+                      <swiper :options="bannerOption">
+                          <swiper-slide v-for="(v,i) in bannerList.swiper" :key="i">
+                            <img :src="v.link" alt="">
+                          </swiper-slide>
+                      </swiper>
+                  </div>
+                  <div class="static-img">
+                      <img :src="bannerList.static[0].link" alt="">
+                      <img :src="bannerList.static[1].link" alt="">
+                  </div>
+                </div>
+                <div class="news-nav clearfix">
+                  <ul>
+                    <li v-on:click="tabNav(i)" :class="i===newsNavData.curIdx?'active':''" v-for="(v,i) in newsNavData.arr" :key="i">{{v}}</li>
+                  </ul>
+                </div>
+                <div class="content">
+                  <hotspot :isTop="i<=2?1:0" v-for="(v,i) in nwesList" :key="i" :item="v" /> 
+                </div>
+              </div>
+              <div class="right-part">
+                <div class="dynamic">
+                  <div class="title clearfix">
+                    <span v-on:click="tabNews(1)" :class="dynamicData.tapIdx == 1 ?'cur':''">快讯</span>
+                    <span v-on:click="tabNews(2)" :class="dynamicData.tapIdx == 2 ?'cur':''">动态</span>
+                    <i class="iconfont"></i>
+                  </div>
+                  <div class="content">
+                      <ul class="fast-news" v-show="dynamicData.tapIdx == 1">
+                        <li v-for="(v,i) in dynamicData.fastList" :key="i">
+                          <h4>{{v.tit}}</h4>
+                          <div class="clearfix">
+                            <span class="fl"></span>
+                            <span class="fr"><i class="iconfont"></i>利空</span>
+                            <span class="fr"><i class="iconfont"></i>利好</span>
+                          </div>
+                        </li>
+                      </ul>
+                      <ul class="move-news" v-show="dynamicData.tapIdx == 2">
+                        <li>动态</li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
     </div>
 </template>
 <script>
+
+import hotspot from '@/components/hotspot'
+
 export default {
   data() {
     return {
@@ -36,6 +89,10 @@ export default {
               nextEl: '.button-next',
               prevEl: '.button-prev'
             }
+      },
+      bannerOption: {
+          autoplay: true,
+          loop: true,
       },
       chartList: [
         {
@@ -209,6 +266,161 @@ export default {
           ]
         }
       ],
+      // 轮播图数据
+      bannerList : {
+        swiper: [
+          {
+            link: require('../../assets/images/1244581.png')
+          },
+          {
+            link: require('../../assets/images/1249704.jpg')
+          },
+          {
+            link: require('../../assets/images/1254693.jpg')
+          },
+          {
+            link: require('../../assets/images/1255881.png')
+          },
+          {
+            link: require('../../assets/images/1255973.jpg')
+          },
+          {
+            link: require('../../assets/images/1256588.jpg')
+          },
+          {
+            link: require('../../assets/images/1261175.jpg')
+          },
+          {
+            link: require('../../assets/images/1263330.jpg')
+          }
+        ],
+        static : [
+         {link: require('../../assets/images/1228618.png')} ,
+         {link: require('../../assets/images/1248368.jpg')}
+        ]
+      },
+      newsNavData: {
+        curIdx: 0,
+        arr: ['头条','新闻','政策','人物','行情','引用','投研','技术','百科']
+      },
+      nwesList: [
+        {
+          img: require('../../assets/images/1159955_small.jpg'),
+          title: '比特币十周年 | 最自由的货币与最曲折的监管',
+          txt:'自2008年中本聪第一次发布比特币白皮书以来，已经有十年的时间，这十年之间比特币价格的每一次波动都牵动着市场投资者的心，价格剧烈波动的背后，各国政策是怎样变化的？',
+          creatTime: '2018/10/27 22:41',
+          auther: '扎NGSAN',
+          vews: 12344,
+          extension: 1,
+          sole: 1
+        },
+        {
+          img: require('../../assets/images/1266315_small.jpg'),
+          title: '游戏新经济的开创者',
+          txt: '你是否愿意同我们一道，一起迎接财富自由浪潮的到来呢？',
+          creatTime: '2018/10/27 22:41',
+          auther: '相爱乡亲',
+          vews: 12344,
+          extension: 0,
+          sole: 0
+        },
+        {
+          img: require('../../assets/images/1267656_small.jpg'),
+          title: '知名律所Morgan Lewis＆Blockius发布欧美加密货币市场监管报告莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
+          txt: 'Morgan Lewis＆Blockius律师事务所认为全球各国政府也都在努力跟上金融技术创新发展的节奏，但市场上的加密货币监管法规仍然需要不断审查、更新和监督。',
+          creatTime: '2018/10/27 22:41',
+          auther: '不是江湖人',
+          vews: 12344,
+          extension: 0,
+          sole: 0
+        },
+        {
+          img: require('../../assets/images/1268012_small.jpg'),
+          title: '莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
+          txt: '法院要求Telegram停止提供消息发送和接收服务，直到他们能够履行俄罗斯监管法律义务、提供解密密钥为止。',
+          creatTime: '2018/10/27 22:41',
+          auther: 'jason',
+          vews: 12344,
+          extension: 0,
+          sole: 0
+        },
+        {
+          img: require('../../assets/images/1159955_small.jpg'),
+          title: '比特币十周年 | 最自由的货币与最曲折的监管',
+          txt:'自2008年中本聪第一次发布比特币白皮书以来，已经有十年的时间，这十年之间比特币价格的每一次波动都牵动着市场投资者的心，价格剧烈波动的背后，各国政策是怎样变化的？',
+          creatTime: '2018/10/27 22:41',
+          auther: '扎NGSAN',
+          vews: 12344,
+          extension: 1,
+          sole: 1
+        },
+        {
+          img: require('../../assets/images/1266315_small.jpg'),
+          title: '游戏新经济的开创者',
+          txt: '你是否愿意同我们一道，一起迎接财富自由浪潮的到来呢？',
+          creatTime: '2018/10/27 22:41',
+          auther: '相爱乡亲',
+          vews: 12344,
+          extension: 0,
+          sole: 0
+        },
+        {
+          img: require('../../assets/images/1267656_small.jpg'),
+          title: '知名律所Morgan Lewis＆Blockius发布欧美加密货币市场监管报告莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
+          txt: 'Morgan Lewis＆Blockius律师事务所认为全球各国政府也都在努力跟上金融技术创新发展的节奏，但市场上的加密货币监管法规仍然需要不断审查、更新和监督。',
+          creatTime: '2018/10/27 22:41',
+          auther: '不是江湖人',
+          vews: 12344,
+          extension: 0,
+          sole: 0
+        },
+        {
+          img: require('../../assets/images/1268012_small.jpg'),
+          title: '莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
+          txt: '法院要求Telegram停止提供消息发送和接收服务，直到他们能够履行俄罗斯监管法律义务、提供解密密钥为止。',
+          creatTime: '2018/10/27 22:41',
+          auther: 'jason',
+          vews: 12344,
+          extension: 0,
+          sole: 0
+        }
+      ],
+      // 快讯动态
+      dynamicData: {
+        tapIdx: 1,
+        fastList: [
+          {
+            tit: '声音 | 张首晟：区块链技术可以通过新的方式建立信任',
+            creatTime: '2018-03-09',
+            good: 33,
+            empty: 55
+          },
+          {
+            tit: '动态 | TAC溯源链获得火币全球热门项目推荐',
+            creatTime: '2018-03-09',
+            good: 33,
+            empty: 55
+          },
+          {
+            tit: '声音 | 张首晟：区块链技术可以通过新的方式建立信任',
+            creatTime: '2018-03-09',
+            good: 33,
+            empty: 55
+          },
+          {
+            tit: '声音 | 肖飒：区块链等行业的发展必然带来更多法律挑战',
+            creatTime: '2018-03-09',
+            good: 33,
+            empty: 55
+          },
+          {
+            tit: '声音 | 张首晟：区块链技术可以通过新的方式建立信任',
+            creatTime: '2018-03-09',
+            good: 33,
+            empty: 55
+          }
+        ]
+      } 
     };
   },
   created() {},
@@ -250,10 +462,24 @@ export default {
         ctx.fill();
       }
     }
+  },
+  methods: {
+    tabNav(i){
+      this.newsNavData.curIdx = i;
+    },
+    tabNews(i){
+      this.dynamicData.tapIdx = i
+    }
+  },
+  components: {
+    hotspot: hotspot
   }
 };
 </script>
 <style scoped>
+.home-template {
+  min-width: 1200px;
+}
 .market-container {
   background: #292b32;
 }
@@ -349,6 +575,100 @@ export default {
 }
 .trend-chart .txt .red {
   background: red;
+}
+.home-main-new {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid #eee; 
+}
+.container {
+  width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.left-part {
+  width: 770px;
+}
+.right-part {
+  width: 370px;
+}
+.banner {
+  display: flex;
+  height: 275px;
+  justify-content: space-between;
+}
+.banner .swiper-img {
+  width: 550px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.banner .swiper-img img{
+  width: 550px;
+  height: 275px;
+  transition: transform 0.3s;
+}
+.banner .swiper-slide:hover img {
+  transform: scale(1.03);
+}
+.static-img {
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.static-img img {
+  width: 200px;
+  height: 127px;
+  border-radius: 5px;
+}
+.news-nav {
+  padding: 60px 0 40px;
+}
+.news-nav li {
+  float: left;
+  color: #999;
+  font-size: 22px;
+  margin-left: 20px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  padding-bottom: 5px;
+}
+.news-nav li:hover {
+  color: orangered;
+}
+.news-nav .active {
+  color: #333;
+  font-weight: bold;
+  border-bottom: 3px solid orangered;
+}
+.left-part .content {
+  width: 100%;
+}
+.right-part .title {
+  font-size: 18px;
+  height: 65px;
+}
+.right-part .title span{
+  margin-right: 20px;
+  float: left;
+  color: #999;
+  padding-bottom: 5px;
+}
+.right-part span:hover {
+  color: goldenrod;
+}
+.right-part .title .cur {
+  color: #333;
+  font-weight: bold;
+  border-bottom: 3px solid orangered;
+}
+.right-part .content {
+  padding-top: 8px;
+  width: 100%;
+  height: 450px;
+  overflow-y: auto;
 }
 </style>
 
