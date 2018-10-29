@@ -53,16 +53,24 @@
                   <div class="content">
                       <ul class="fast-news" v-show="dynamicData.tapIdx == 1">
                         <li v-for="(v,i) in dynamicData.fastList" :key="i">
-                          <h4>{{v.tit}}</h4>
+                          <h4><a href="">{{v.tit}}</a></h4>
                           <div class="clearfix">
-                            <span class="fl"></span>
-                            <span class="fr"><i class="iconfont"></i>利空</span>
-                            <span class="fr"><i class="iconfont"></i>利好</span>
+                            <span class="fl">{{v.creatTime | formatData}}</span>
+                            <a class="fr up"><i class="iconfont icon-tubiaoxiajiangqushi"></i> 利空 {{v.empty}}</a>
+                            <a class="fr down"><i class="iconfont icon-tubiaoshangshengqushi"></i> 利好 {{v.good}}</a>
                           </div>
                         </li>
                       </ul>
                       <ul class="move-news" v-show="dynamicData.tapIdx == 2">
-                        <li>动态</li>
+                        <li v-for="(v,i) in dynamicData.moveList" :key="i">
+                          <div class="img-box">
+                            <img :src="v.img" alt="">
+                          </div>
+                          <div class="text-box">
+                              <h4>{{v.name}}<span>{{v.creatTime}}</span></h4>
+                              <p>{{v.text}}</p>              
+                          </div>
+                        </li>
                       </ul>
                   </div>
                 </div>
@@ -419,6 +427,50 @@ export default {
             good: 33,
             empty: 55
           }
+        ],
+        moveList: [
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '瑞典央行准备与e-krona建立无现金的未来，因为担心如果官员不加速加密货币，民事机构就会接管这个角色。 瑞典一直领先于时代，是欧洲第一个发行纸币的国家。谁是下一个？',
+            creatTime: '1543572000'
+          },
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '恭喜@htcexodus https://t.co/Fh1aLyVfO9发布！',
+            creatTime: '1543572000'
+          },
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '恭喜@htcexodus https://t.co/Fh1aLyVfO9发布！',
+            creatTime: '1543572000'
+          },
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '恭喜@htcexodus https://t.co/Fh1aLyVfO9发布！',
+            creatTime: '1543572000'
+          },
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '恭喜@htcexodus https://t.co/Fh1aLyVfO9发布！',
+            creatTime: '1543572000'
+          },
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '恭喜@htcexodus https://t.co/Fh1aLyVfO9发布！',
+            creatTime: '1543572000'
+          },
+          {
+            img: require('../../assets/images/20180109151845_KTAZ8.jpg'),
+            name: '我叫张二三',
+            text: '恭喜@htcexodus https://t.co/Fh1aLyVfO9发布！',
+            creatTime: '1543572000'
+          },
         ]
       } 
     };
@@ -589,9 +641,11 @@ export default {
 }
 .left-part {
   width: 770px;
+  overflow: hidden;
 }
 .right-part {
   width: 370px;
+  overflow: hidden;
 }
 .banner {
   display: flex;
@@ -655,6 +709,7 @@ export default {
   float: left;
   color: #999;
   padding-bottom: 5px;
+  cursor: pointer;
 }
 .right-part span:hover {
   color: goldenrod;
@@ -666,10 +721,88 @@ export default {
 }
 .right-part .content {
   padding-top: 8px;
-  width: 100%;
-  height: 450px;
-  overflow-y: auto;
+  width: 105%;
+  height: 535px;
+  overflow-y: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
 }
+.right-part .fast-news h4 {
+  line-height: 24px;
+}
+
+ .fast-news h4 a {
+  color: #29293b;
+}
+.fast-news li div {
+  color: #9b9b9b;
+  line-height: 20px;
+  font-size: 14px;
+  margin-top: 6px;
+}
+.right-part .fast-news li{
+  padding: 0 10px 30px 20px;
+  position: relative;
+}
+.fast-news li:after {
+  width: 7px;
+  height: 7px;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  background: orange;
+  border-radius: 50%;
+}
+.fast-news li:before {
+  width: 1px;
+  background: #eee;
+  height: 100%;
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 7px;
+}
+.fast-news li:last-child::before {
+  display: none;
+}
+.fast-news .up i {
+  color: green;
+  font-weight: bold
+}
+.fast-news .up {
+  margin-left: 20px;
+}
+.fast-news .down i{
+  color: red;
+  font-weight: bold
+}
+.move-news li {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+.move-news li .img-box {
+  width: 50px;
+}
+.move-news .img-box img {
+  width: 100%;
+  border-radius: 50%;
+}
+.move-news li .text-box {
+  width: 300px;
+  color: #333;
+  font-size: 14px;
+}
+.move-news h4 {
+  margin-bottom: 10px; 
+}
+.move-news h4 span {
+  padding-left: 20px;
+  font-size: 12px;
+  color: #999;
+}
+
 </style>
 
 

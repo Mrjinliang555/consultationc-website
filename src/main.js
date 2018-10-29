@@ -15,6 +15,15 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.config.productionTip = false
 
+Vue.filter('formatData', function(value){
+  if( !value ) return "";
+  var num = (new Date()) - (new Date(value));
+  num = parseInt(num/1000);
+  num = num / (24*60*60)
+  console.log( num )
+  return "fffffff"
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
