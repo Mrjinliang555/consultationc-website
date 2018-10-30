@@ -9,7 +9,7 @@
             <div class="info">
                 <div class="fl">
                     <em v-if="isTop==1">置顶</em>
-                    <span><a class="add-hover" href="">{{item.auther + ' · ' + item.creatTime}}</a></span>
+                    <span><a class="add-hover" href="">{{item.auther + ' · ' }}{{item.creatTime  | formatData}}</a></span>
                 </div>
                 <div class="fr">
                     <i class="iconfont icon-yanjing"></i>
@@ -82,7 +82,7 @@ export default {
     color: #999;
 }
 
-.info .fl em{
+.info .fl em {
     font-size: 14px;
     color: #e0051e;
     margin-right: 8px;

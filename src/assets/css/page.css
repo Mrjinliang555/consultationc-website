@@ -112,3 +112,7 @@
 .hover-box:hover .swiper-pagination .swiper-pagination-bullet {
     opacity: 1;
 }
+
+.entrepreneurship .swiper-pagination-bullet {
+    margin: 0 5px;
+}
