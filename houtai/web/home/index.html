@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=1024, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的后台管理系统</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <script type="text/javascript">
+
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+        function onDeviceReady() {
+            document.addEventListener("resume", onResume, false);
+        }
+
+        function onResume() {
+            //回到前台后  调用这里
+            try {
+                Cordova.cordovaComplete = true;
+                navigator.splashscreen.hide();
+            } catch (e) {
+            }
+        }
+    </script>
+</head>
+<body onload="onLoad()">
+
+<!-- S Wrapper -->
+<div class="wrapper">
+
+    <!-- S Header -->
+    <div class="header">
+        <div class="user-info">
+            <div class="logo fl">
+                后台管理系统
+            </div>
+            <div class="user fr">
+                <ul>
+                    <li title="退出" class="sign out"><i class="glyphicon glyphicon-off"></i></li>
+                    <li>欢迎你，李金良</li>
+                    <li>
+                        <img src="../../images/male_active.png" alt="">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- menu bar -->
+    <div class="menu-bar">
+        <div class="out-container">
+            <ul class="first-order">
+                <li class="active"><i class="glyphicon glyphicon-home"></i><span>首页管理<em class="glyphicon glyphicon-menu-down"></em></span></li>
+                <li><i class="glyphicon glyphicon-envelope"></i><span>快讯管理<em class="glyphicon glyphicon-menu-right"></em></span></li>
+                <li><i class="glyphicon glyphicon-screenshot"></i><span>行情管理<em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+                <li><i class="glyphicon glyphicon-cd"></i><span>数据管理<em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+                <li><i class="glyphicon glyphicon-gift"></i><span>活动管理<em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+            </ul>
+            <div class="secont-order">
+                <div class="title">
+                    首页管理
+                </div>
+                <ul class="big-nav">
+                    <li class="item">
+                        <ul class="small-nav">
+                            <li class="cur">轮播图管理</li>
+                            <li>新闻分类</li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul class="small-nav">
+                            <li>快讯管理</li>
+                            <li>快讯管理</li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul class="small-nav">
+                            <li>行情管理</li>
+                            <li>行情管理</li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul class="small-nav">
+                            <li>数据管理</li>
+                            <li>数据管理</li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul class="small-nav">
+                            <li>活动管理</li>
+                            <li>活动管理</li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- S Main -->
+    <div class="main">
+
+        <!-- Get Content -->
+
+    </div>
+    <!-- E Main -->
+
+</div>
+<!-- E Wrapper -->
+
+<script src="../../lib/jquery-1.12.4.min.js"></script>
+<script src="../../lib/seajs/sea.js"></script>
+<script src="../../lib/common/common.js"></script>
+<!--<script src="../../utils/vconsole.min.js"></script>-->
+<script>
+    var dateTag = new Date();
+    /*var VConsole = new VConsole();*/
+    seajs.config({
+        base: '../../',
+        alias: {
+            'interface': 'utils/interface',
+            'validation': 'utils/validation',
+            'seajsText': 'lib/seajs/seajs-text',
+            'seajsCss': 'lib/seajs/seajs-css',
+            'doT': 'lib/doT.min',
+            'moment': 'lib/moment.min',
+            'base64': 'lib/base64',
+            'swiper': 'lib/swiper.min',
+            'echarts': 'lib/echarts.min',
+            'bootstrap': 'lib/bootstrap.min'
+        },
+        paths: {},
+        preload: [
+            'common'
+        ],
+        map: [
+            [/^(.*\.(?:css|js|html))(.*)$/i, '$1?' + dateTag.getTime()]
+        ]
+    });
+    seajs.use('./index.js');
+</script>
+</body>
+</html>

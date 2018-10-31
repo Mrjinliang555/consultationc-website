@@ -1067,6 +1067,7 @@ export default {
   border-bottom: 1px solid #dcdcdc;
   padding: 10px 0;
   /* transition: width .6s; */
+  transition: all .4s cubic-bezier(0,0,.2,1);
 }
 .activity-list .current {
   border-bottom: 1px solid transparent;
@@ -1076,6 +1077,7 @@ export default {
 }
 .activity-list .current {
   width: 65%;
+  /* transition-delay: .3s; */
 }
 .activity-list li .short {
   width: 100%;
@@ -1121,6 +1123,9 @@ export default {
   left: 60px;
   top: 50%;
   transform: translateY(-50%);
+  width: 100px;
+  /* transition-delay: .1s; */
+  /* transition: opacity .2s; */
 }
 .activity-list .long p,
 .activity-list .long h3 {
