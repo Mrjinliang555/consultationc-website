@@ -6,24 +6,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
-<title>富卫在线投保</title>
-<link rel="stylesheet" href="../../css/iconfont/iconfont.css">
+<title>后台管理系统</title>
 <link rel="stylesheet" href="../../css/reset.css">
-<link rel="stylesheet" href="../../css/style.css">
-<link rel="stylesheet" href="../../css/login.css">
+<link rel="stylesheet" href="../../css/bootstrap.css">
+<link rel="stylesheet" href="./login.css">
 <script type="text/javascript">
-
-	if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
-		var version = parseFloat(RegExp.$1);
-		if(version>2.3){
-			var phoneScale = parseInt(window.screen.width)/1024;
-			document.write('<meta name="viewport" content="width=1024, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
-		}else{
-			document.write('<meta name="viewport" content="width=1024, target-densitydpi=device-dpi">');
-		}
-	}else{
-		document.write('<meta name="viewport" content="width=1024, user-scalable=no, target-densitydpi=device-dpi">');
-	};
 
 	function onLoad() {
 		document.addEventListener("deviceready", onDeviceReady, false);
@@ -47,57 +34,27 @@
 
 	<!-- S Wrapper -->
 	<div class="wrapper">
-
-		<div class="login">
-			<h2><img src="../../images/logo.png" alt="FW">在线投保系统</h2>
-			<form id="formLogin" enctype="multipart/form-data" method="post">
-			<ul class="ui-form-login">
-				<li class="ui-form-row">
-					<label for="account">
-						<i class="icon-account"></i>
-					</label>
-					<input name="loginName" id="account" type="text" placeholder="输入用户代码" value="">
-				</li>
-				<li class="ui-form-row">
-					<label for="password">
-						<i class="icon-password"></i>
-					</label>
-					<input name="password" id="password" type="password" placeholder="登录密码" value="">
-				</li>
-			</ul>
-			<button type="button" class="btn btn-lg btn-login">登 录</button>
-			</form>
+		<img src="../../images/login.gif" alt="">
+		<div class="form">
+			<h3>欢迎登录良的后台系统</h3>
+			<div class="form-group" id="username">
+				<i class="glyphicon glyphicon-user"></i>
+				<input type="text" name="username" placeholder="请输入用户名">
+			</div>
+			<div class="form-group" id="password">
+				<i class="glyphicon glyphicon-lock"></i>
+				<input type="password" name="password" placeholder="请输入密码">
+				<span class="glyphicon glyphicon-eye-open"></span>
+			</div>
+			<div class="form-group">
+				<button type="button" id="login-btn" class="btn btn-success">立即登录</button>
+			</div>	
 		</div>
-		<button class="udid" style="opacity: 0; position: absolute; left: 0; top: 0;"><span></span></button>
-		<div class="copyright">富衛&copy; 2017 富衛 版權所有 不得轉載</div>
 
 	</div>
 	<!-- E Wrapper -->
 
-	<!-- S Popup Share -->
-	<div class="popup-box popup-new-edition">
-		<div class="popup-header">
-			<h2>系统升级</h2>
-			<button type="button" class="popup-close"><i class="icon-close-empty"></i></button>
-		</div>
-		<div class="popup-content">
-			<p>检测到新版本是否升级？</p>
-			<div class="button">
-				<button type="button" class="btn btn-lg btn-default popup-close">下次再说</button>
-				<button type="button" class="btn btn-lg btn-submit">立即升级</button>
-			</div>
-		</div>
-	</div>
-	<!-- E Popup Share -->
-
-	<script src="../../lib/zepto.min.js"></script>
-	<script src="../../lib/zepto.md5.js"></script>
-	<script src="../../lib/zepto.touch.js"></script>
-	<script src="../../lib/cordova/cordova.js"></script>
-	<script src="../../lib/common/common.js"></script>
-	<script src="../../utils/interface.js"></script>
-	<!-- <script src="../../utils/vconsole.min.js"></script> -->
+	<script src="../../lib/jquery-1.12.4.min.js"></script>
 	<script src="login.js"></script>
-
 </body>
 </html>

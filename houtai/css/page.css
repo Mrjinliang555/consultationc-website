@@ -63,12 +63,12 @@ html,body {
 .wrapper {
     position: relative;
     padding-top: 50px;
-    padding-left: 207px;
+    padding-left: 45px;
     height: 100%;
     width: 100%;
+    transition: padding-left .5s;
 }
 .menu-bar {
-    width: 207px;
     height: 100%;
     background-color: rgb(37, 42, 47);
     position: absolute;
@@ -84,6 +84,7 @@ html,body {
 }
  .secont-order,
 .first-order {
+    padding-top: 50px;
     height: 100%;
     position: absolute;
     left: 0;
@@ -94,7 +95,7 @@ html,body {
     width: 45px;
     z-index: 22;
     background: rgb(37, 42, 47);
-    padding-top: 60px;
+    /* padding-top: 60px; */
     transition: width .5s;
     overflow: hidden;
 }
@@ -108,6 +109,9 @@ html,body {
     color: rgb(179, 181, 182);
     position: relative;
     cursor: pointer;
+}
+.first-order li p {
+    display: inline;
 }
 
 .first-order li i {
@@ -142,10 +146,11 @@ html,body {
     padding-right: 15px;
 }
 .secont-order {
-   width: 100%;
+   width: 207px;
+   left: -162px;
    z-index: 11;
-   background: rgb(234, 237, 241);
    padding-left: 45px;
+   transition: left .5s;
 } 
 .secont-order .title {
     height: 60px;
@@ -155,4 +160,47 @@ html,body {
     background-color: rgb(211,217,228);
     padding-left: 20px;
     font-size: 12px;
+}
+.secont-order .big-nav {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.secont-order .item {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: rgb(233, 236, 240);
+    display: none;
+}
+.secont-order .item li {
+    line-height: 40px;
+    padding-left: 23px;
+    color: #333;
+    font-size: 12px;
+}
+.secont-order .item li:hover {
+    background-color: rgb(243,245,247);
+}
+.secont-order .item li.cur {
+    background-color: #fff;
+}
+.show-hide-btn {
+    z-index: 43;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 8px 3px;
+    cursor: pointer;
+    background-color: rgb(93, 241, 91);
+    color: #fff;
+    border-radius: 7px 0 0 7px;
+    transition: all 0.4s;
+}
+.show-hide-btn.current {
+    right: -20px;
+    border-radius:0 7px  7px  0;
 }

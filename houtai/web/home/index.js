@@ -55,6 +55,38 @@ define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap']
 
 $.pageInit = function () {
     
+// 切换一级标题
+    common.bindEvent('click', '.menu-bar .first-order li', function($this){
+        if( $this.hasClass('active') ) return;
+        if( !window.onlyInitOnec ) {
+            window.onlyInitOnec = true;
+            $('.menu-bar .secont-order').css('left',0);
+            $('.wrapper').css('padding-left',207)
+        }
+        $this.addClass('active').siblings().removeClass('active');
+        $('.menu-bar .secont-order .title').text( $this.find('p').text() );
+        var idx = $this.index();
+        $('.menu-bar .secont-order .item').eq(idx).show().siblings().hide();
+    })
+
+    // 切换二级标题
+    common.bindEvent('click', '.menu-bar .small-nav li', function($this){
+        if( $this.hasClass('cur') ) return;
+        $this.addClass('cur').siblings().removeClass('cur');
+    })
+
+    //展开与隐藏
+    common.bindEvent('click', '.menu-bar .show-hide-btn', function($this){
+        if($this.hasClass('current')){
+            $this.removeClass('current');
+            $('.menu-bar .secont-order').css('left',0);
+            $('.wrapper').css('padding-left',207)
+        }else{
+            $this.addClass('current');
+            $('.menu-bar .secont-order').css('left',-162);
+            $('.wrapper').css('padding-left',45)
+        }
+    })
 };
 
 $.loadPanel = function () {

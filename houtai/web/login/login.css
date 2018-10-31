@@ -1,0 +1,59 @@
+html,body,.wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    background-color: rgb(252,252,252);
+    position: relative;
+}
+.wrapper img {
+    width: 250px;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.form {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid rgb(202,253,168);
+    transform: translate(-50%,-50%);
+    padding: 0 60px;
+}
+.form input {
+    background: rgb(208, 253, 172);
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 38px;
+    border: none;
+    outline: none;
+}
+.form-group {
+    padding-top: 20px;
+    position: relative;
+    text-align: center;
+}
+.form-group i {
+    position: absolute;
+    left: 13px;
+    top: 33px;
+    color: #666;
+}
+.form-group span {
+    position: absolute;
+    right: 13px;
+    top: 33px;
+    color: green;
+    cursor: pointer;
+}
+.form h3 {
+    text-align: center;
+    color: green
+}
