@@ -20,7 +20,7 @@ define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap']
         });
         return false;
     }else {
-        $('.header img').attr('src', '/phptest/images/' + userInfo.photo);
+        $('.header img').attr('src', '/phptest/upload/' + userInfo.photo);
         $('.header .uname').text(userInfo.nickname);
     } 
       
