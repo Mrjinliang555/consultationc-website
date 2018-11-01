@@ -13,10 +13,8 @@ var Interface = Interface || {};
 
     //Interface.ss.token = 'ACCESS_TOKEN'; //token
 
-    var origin = '/fwd/';
+    var origin = '/phptest/houtai/';
     //用户平台信息
-    var userPlatform = getPlatform() || '';
-
 
     //用户登录token
     //var _token = common.getLocalStorage('ACCESS_TOKEN') || '';
@@ -26,10 +24,10 @@ var Interface = Interface || {};
         if (paramData.ifOpenLoading) {
             common.loading.open();
         }
-        var _randomcode = common.getRandomCode();  //随机码
-        var _signature = common.getSignature(_randomcode);   //签名
-        var _agentId = common.getLocalStorage('userInfo', true).agentId || '';
-        var _udId = common.getLocalStorage('udid') || '';
+        // var _randomcode = common.getRandomCode();  //随机码
+        // var _signature = common.getSignature(_randomcode);   //签名
+        // var _agentId = common.getLocalStorage('userInfo', true).agentId || '';
+        // var _udId = common.getLocalStorage('udid') || '';
 
         var param = paramData.data;
         //异步处理
@@ -45,27 +43,20 @@ var Interface = Interface || {};
         };
         var returnData;
 
-        if (num == 1) {
-            origin = '/fwdzh/';//照会接口
-        } else {
-            origin = '/fwd/'
-        }
         var _options = {
             async: asyncMethod,
             url: origin + paramData.url,
             type: paramData.type || 'GET',
             headers: {
-                'system': userPlatform,
-                'randomcode': _randomcode,
-                'signature': _signature,
-                'udid': _udId,
-                'agentId': _agentId,
+                // 'randomcode': _randomcode,
+                // 'signature': _signature,
+                // 'udid': _udId,
+                // 'agentId': _agentId,
                 'max-stale': 3000000,
                 //"token": _token
                 'System-Name' : 'app-pad-smart',
                 'version': '1.0.0',
-                'osname':  userPlatform,
-                'agentcode': _agentId
+                // 'agentcode': _agentId
             },
             timeout: '300000',
             contentType: 'application/x-www-form-urlencoded',

@@ -12,16 +12,66 @@ common.bindEvent = function (events, selector, callback) {
     });
 }
 
-common.getMathRand = function (num) {
-    var _val = '';
-    if (typeof num !== 'number') {
-        return '00000';
-    }
-    for (var i = 0; i < num; i++) {
-        _val += Math.floor(Math.random() * 10);
-    }
-    return _val;
+common.confirmCreate = function (params) {
+    var options = {
+        html: params.html,
+        callback: function (number) {
+        }
+    };
+
+    var pa = $.extend({}, options, params);
+    var _popup = '\
+    <div class="popup-bg">\
+		<div class="popup-box popup-confirm">\
+			<div class="popup-header">\
+                <h2>提示</h2>\
+			</div>\
+			<div class="popup-content">\
+				<div class="text">' + pa.html + '</div>\
+				<div class="button">\
+					<button type="button" class="btn btn-default btn-confirm-cancel">取消</button>\
+					<button type="button" class="btn btn-success btn-confirm-confirm">确定</button>\
+				</div>\
+			</div>\
+        </div></div>';
+    $("body").append($(_popup));
+    $('.btn-confirm-cancel').one('click', function () {
+        $.isFunction(pa.callback) && pa.callback(0);
+        $('.popup-bg').remove();
+    });
+    $('.btn-confirm-confirm').one('click', function () {
+        $.isFunction(pa.callback) && pa.callback(1);
+        $('.popup-bg').remove();
+    });
 };
+common.confirm = function (params) {
+    var options = {
+        html: params.html,
+        callback: function (number) {
+        }
+    };
+
+    var pa = $.extend({}, options, params);
+    var _popup = '\
+    <div class="popup-bg">\
+		<div class="popup-box popup-confirm">\
+			<div class="popup-header">\
+                <h2>提示</h2>\
+			</div>\
+			<div class="popup-content">\
+				<div class="text">' + pa.html + '</div>\
+				<div class="button">\
+					<button type="button" class="btn btn-success btn-confirm-confirm">确定</button>\
+				</div>\
+			</div>\
+        </div></div>';
+    $("body").append($(_popup));
+    $('.btn-confirm-confirm').one('click', function () {
+        $.isFunction(pa.callback) && pa.callback();
+        $('.popup-bg').remove();
+    });
+};
+
 
 common.getRandomCode = function () {
     var date = new Date();
@@ -33,86 +83,6 @@ common.getSignature = function (randomcode) {
     var openkey = 'fairyland';
     return $.md5($.md5(openname + openkey) + randomcode);
 }
-
-common.tipSystem = function (params) {
-    var options = {
-        html: params.html,
-        timeout: params.timeout || 0,
-        callback: function (data) {
-        }
-    };
-    var init = $.extend(options, params);
-    var _html = '<div class="tip-system">\
-		<p><i class="icon-tips"></i>' + init.html + '</p>\
-		<button type="button" class="btn-close"><i class="icon-close"></i></button>\
-	</div>';
-    $('body').append(_html);
-
-    var _obj = $('.tip-system');
-    _obj.animate({opacity: 1}, 300);
-    _obj.on('click', '.btn-close', function () {
-        $.isFunction(init.callback) && init.callback(1);
-        $(this).parents('.tip-system').remove();
-    });
-    if (init.timeout > 0) {
-        setTimeout(function () {
-            $.isFunction(init.callback) && init.callback(1);
-            _obj.animate({opacity: 0}, 500, function () {
-                $(this).remove();
-            });
-        }, init.timeout);
-    }
-
-};
-
-/*
- *confirm提示框
- * common.confirmCreate({
- * 		html: '<p>是否需要电话咨询律师，<br>指导事故处理?</p>',
- * 		callback: function(status) {
- *				if(status == '1'){
- *					alert('是');
- *				}else{
- * 					alert('否');
- * 				}
- *		}
- * });
- * */
-common.confirmCreate = function (params) {
-    var options = {
-        html: params.html,
-        callback: function (number) {
-        }
-    };
-
-    var pa = $.extend({}, options, params);
-    var _popup = '\
-		<div class="popup-box popup-confirm">\
-			<div class="popup-header">\
-				<h2>提示</h2>\
-			</div>\
-			<div class="popup-content">\
-				<div class="text">' + pa.html + '</div>\
-				<div class="button">\
-					<button type="button" class="btn btn-lg btn-default btn-confirm-cancel">取消</button>\
-					<button type="button" class="btn btn-lg btn-submit btn-confirm-confirm">确定</button>\
-				</div>\
-			</div>\
-		</div>';
-    $("body").append($(_popup));
-    common.popup('.popup-confirm');
-    $('.btn-confirm-cancel').one('tap', function () {
-        $.isFunction(pa.callback) && pa.callback(0);
-        common.closePopup('.popup-confirm');
-        $('.popup-confirm').remove();
-    });
-    $('.btn-confirm-confirm').one('tap', function () {
-        $.isFunction(pa.callback) && pa.callback(1);
-        common.closePopup('.popup-confirm');
-        $('.popup-confirm').remove();
-    });
-};
-
 
 common.toast = function (params) {
     var options = {
@@ -137,135 +107,6 @@ common.toast = function (params) {
         clearTimeout(toastTimer);
     }, pa.time);
 }
-
-common.dialogAlert = function (params) {
-    var options = {
-        html: params.html,
-        callback: function () {
-        }
-    };
-
-    var pa = $.extend({}, options, params);
-
-    if ($('.dialog-wrap.dialog-alert').size() > 0) {
-        $('.dialog-wrap.dialog-alert').remove();
-    }
-
-    var _popup = '\
-        <div class="dialog-wrap dialog-alert" style="opacity: 0;">\
-            <div class="alert-content">\
-                <div class="popup-header">\
-                    <h2>提示</h2>\
-                </div>\
-                <div class="popup-content">\
-                    <div class="text">' + pa.html + '</div>\
-                    <div class="button">\
-                        <button type="button" class="btn btn-lg btn-submit btn-alert-confirm">确定</button>\
-                    </div>\
-                </div>\
-            </div>\
-        </div>';
-    $("body").append($(_popup));
-    $('.dialog-wrap.dialog-alert').animate({opacity: 1}, 300);
-    $('body').find('.btn-alert-confirm').unbind('touchend').on('touchend', function (e) {
-        var event = e || window.event;
-        event.preventDefault();
-        event.stopPropagation();
-        pa.callback && pa.callback();
-        $('.dialog-wrap.dialog-alert').animate({opacity: 0}, 300, function () {
-            $('.dialog-wrap.dialog-alert').remove();
-        });
-    });
-};
-
-common.dialogPopup = function (params) {
-    var options = {
-        title: params.title || '提示',
-        html: params.html,
-        cancelText: params.cancelText || '取消',
-        confirmText: params.confirmText || '确定'
-    };
-
-    var pa = $.extend({}, options, params);
-
-    if ($('.dialog-wrap.dialog-popup').size() > 0) {
-        $('.dialog-wrap.dialog-popup').remove();
-    }
-
-    var _popup = '\
-        <div class="dialog-wrap dialog-popup" style="opacity: 0;">\
-            <div class="alert-content">\
-                <button type="button" class="popup-close"><i class="icon-close-empty"></i></button>\
-                <div class="popup-header">\
-                    <h2>' + params.title + '</h2>\
-                </div>\
-                <div class="popup-content">\
-                    <div class="html">' + pa.html + '</div>\
-                </div>\
-            </div>\
-        </div>';
-    $("body").append($(_popup));
-
-    $('.dialog-wrap.dialog-popup').animate({opacity: 1}, 300);
-}
-common.hideDialogPopup = function () {
-    $('.dialog-wrap.dialog-popup').animate({opacity: 0}, 300, function () {
-        $('.dialog-wrap.dialog-popup').remove();
-    });
-}
-/*
- *alert提示框
- * common.alertCreate({
- * 		html: '<p>是否需要电话咨询律师，<br>指导事故处理?</p>',
- * 		callback: function(status) {
- *		}
- * });
- * */
-common.alertCreate = function (params) {
-    var options = {
-        html: params.html,
-        callback: function () {
-        }
-    };
-    var pa = $.extend({}, options, params);
-   var passvalue=$('[name=loginName]').val()
-   var html=""
-   if(pa.html==="Incorrect Password"||pa.html==='Mmeber AGT/'+passvalue+' is locked out'){
-    html="请输入正确的密码"
-   }else if(pa.html==='Mmeber AGT/'+passvalue+' not found'){
-    html="没有此用户"
-   }else{
-    html=pa.html
-   }
-   console.log(html)
-//    var html=pa.html==="Incorrect Password"?"请输入正确的密码":pa.html==="Mmeber AGT/10000562777 not found"没有次用户"
-    if ($('.popup-confirm').size() > 0) {
-        $('.popup-confirm').remove();
-    }
-
-    var _popup = '\
-		<div class="popup-box popup-confirm">\
-			<div class="popup-header">\
-				<h2>提示</h2>\
-			</div>\
-			<div class="popup-content">\
-				<div class="text">' + html + '</div>\
-				<div class="button">\
-					<button type="button" class="btn btn-lg btn-submit btn-confirm-confirm">确定</button>\
-				</div>\
-			</div>\
-		</div>';
-    $("body").append($(_popup));
-    common.popup('.popup-confirm');
-
-    $('.btn-confirm-confirm').one('tap', function () {
-        $.isFunction(pa.callback) && pa.callback(1);
-        common.closePopup('.popup-confirm');
-        $('.popup-confirm').remove();
-    });
-
-}
-
 //加载框
 common.loading.create = function (msg) {
     var h = new Array();
@@ -326,95 +167,7 @@ common.decipher = function (key) {
     return rerunValue;
 }
 
-common.isRunningInApp = function () {
-    function getCookie(name) {
-        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-        if (arr = document.cookie.match(reg)) {
-            var cookie = '' + arr[2] + '';
-            if (cookie == 'null') {
-                return 'false';
-            }
-            return unescape(arr[2]);
-        } else {
-            return 'false';
-        }
-    }
 
-    //判断是否在androidApp
-    var isAndroidApp = window.javaBridgeInterface &&
-        window.javaBridgeInterface.getClientOS("android").toLocaleLowerCase() == 'android';
-
-    var isiPhoneApp = getCookie('isiPhoneApp');
-    if ("false" == isiPhoneApp) {
-        isiPhoneApp = false;
-    }
-    if ('true' == isiPhoneApp) {
-        isiPhoneApp = true;
-    }
-
-    if (isAndroidApp || isiPhoneApp) {
-        //在APP中运行
-        return true;
-    }
-    return false;
-}
-
-/**二秒后消失的弹出框
- *@param message:消息内容，只传字符串
- */
-common.Prompt = function (message) {
-
-    //创建prompt框
-    var h = $('<div class="tip-short" id="e_ui_prompt">' + message + '</div>');
-    $('body').append(h);
-
-    //改变透明度
-    var i = 0;
-    var t = setInterval(function () {
-        i = i + 0.1;
-        if (i >= 1) {
-            clearInterval(t);
-            i = 0;
-        } else {
-            $(h).css('opacity', i);
-        }
-    }, 80);
-
-    //2秒后消失
-    setTimeout(function () {
-        var j = $(h).css('opacity');
-        var ti = setInterval(function () {
-            j = j - 0.1;
-            if (j <= 0) {
-                clearInterval(ti);
-                $(h).remove();
-            } else {
-                $(h).css('opacity', j);
-            }
-        }, 80);
-    }, 4000);
-};
-
-common.forbidInputEmoji = function () {
-
-    $('input').on('keyup', function () {
-        if (isEmojiCharacter(this.value)) {
-            this.value = '';
-        }
-    });
-
-    $('input').on('paste', function () {
-        if (isEmojiCharacter(this.value)) {
-            this.value = '';
-        }
-    });
-
-    $('input').on('contextmenu', function () {
-        if (isEmojiCharacter(this.value)) {
-            this.value = '';
-        }
-    });
-};
 
 //设置本地缓存
 common.setLocalStorage = function (key, value, isJson) {
@@ -582,189 +335,6 @@ common.getQuery = function (name) {
     return m ? m[1] : '';
 };
 
-//获取当前运行平台
-function getPlatform() {
-
-    var platforms = {
-        amazon_fireos: /cordova-amazon-fireos/,
-        android: /Android/,
-        ios: /(iPad)|(iPhone)|(iPod)/,
-        blackberry10: /(BB10)/,
-        blackberry: /(PlayBook)|(BlackBerry)/,
-        windows8: /MSAppHost/,
-        windowsphone: /Windows Phone/
-    };
-
-    for (var key in platforms) {
-        if (platforms[key].exec(navigator.userAgent)) {
-            return key;
-        }
-    }
-    return "";
-};
-
-//是否在Android壳子中运行
-common.isAndroidApp = function () {
-    var result = false;
-    if (window.javaBridgeInterface && window.javaBridgeInterface.getClientOS("android").toLocaleLowerCase() === 'android') {
-        console.log('当前运行环境是在Android壳子中运行');
-        result = true;
-    }
-
-    //如果判断失败，再次判断所属平台
-    if (!result) {
-        if (getPlatform() == "android") {
-            result = true;
-        } else {
-            result = false;
-        }
-    }
-    return result;
-}();
-
-
-//是否在iPhone壳子中运行
-common.isiPhoneApp = function () {
-    var result = common.getCookie('isiPhoneApp', false) || "false";
-    if (result != "true") {
-        if (typeof (getClientOS) == 'function' && getClientOS().toLocaleLowerCase() == 'ios') {
-            result = "true";
-            console.log('当前运行环境是在iOS壳子中运行');
-        } else if (window.navigator.userAgent.indexOf(",cpic_zt_ios") > -1) {
-            //2015-10-21 目前已通过userAgent解决此问题，考虑到用户不会选择更新的问题此代码开放最少等到最新版ios上线appstore1个月后
-            result = "true";
-        } else {
-            result = (common.getQueryString("e") == "1").toString(); //1==ios
-        }
-    }
-
-    //如果判断失败，再次判断所属平台
-    if (result != "true") {
-        if (getPlatform() == "ios" && isApp()) {
-            result = "true";
-        } else {
-            result = "false";
-        }
-    }
-
-    //写入cookie
-    common.setCookie('isiPhoneApp', result);
-    return result == "true" ? true : false;
-}();
-//当前是否在壳子中运行
-common.isRunByApp = function () {
-    return common.isAndroidApp || common.isiPhoneApp;
-}();
-/**
- * 是否运行在APP中
- */
-common.getInfoByIdCard = function(val){
-    var birthdayValue,sex = 'F';
-    if(15==val.length){ //15位身份证号码
-        birthdayValue = val.charAt(6)+val.charAt(7);
-        if(parseInt(birthdayValue)<10){
-            birthdayValue = '20'+birthdayValue;
-        }else{
-            birthdayValue = '19'+birthdayValue;
-        }
-//性别判断,给radio男女赋值,出生日期赋值
-        birthdayValue=birthdayValue+'-'+val.charAt(8)+val.charAt(9)+'-'+val.charAt(10)+val.charAt(11);
-        if(parseInt(val.charAt(14)/2)*2!=val.charAt(14)) {
-            sex='M';
-        }
-    }
-    if(18==val.length){ //18位身份证号码
-//性别判断,给radio男女赋值,出生日期赋值
-        birthdayValue=val.charAt(6)+val.charAt(7)+val.charAt(8)+val.charAt(9)+'-'+val.charAt(10)+val.charAt(11)
-          +'-'+val.charAt(12)+val.charAt(13);
-        if(parseInt(val.charAt(16)/2)*2!=val.charAt(16)){
-            sex='M';
-        }
-    }
-    return {
-        birthday: birthdayValue,
-        sex: sex,
-        age: common.getAge(birthdayValue)
-    };
-}
-/**
- * 是否运行在APP中
- */
-function isApp() {
-    var result = true;
-
-    var userAgent = window.navigator.userAgent;
-
-    //浏览器
-    if (userAgent.indexOf('Safari') >= 0) {
-        result = false;
-    }
-
-    if (result) {
-        //微信
-        if (userAgent.indexOf('MicroMessenger') >= 0) {
-            result = false;
-        }
-    }
-
-    if (result) {
-        //QQ
-        if (userAgent.indexOf('QQ') >= 0) {
-            result = false;
-        }
-    }
-
-    if (result) {
-        //支付宝
-        if (userAgent.indexOf('AliApp') >= 0) {
-            result = false;
-        }
-    }
-
-    if (result) {
-        //微博
-        if (userAgent.indexOf("Weibo") >= 0 && userAgent.indexOf("_weibo_") >= 0) {
-            result = false;
-        }
-    }
-
-    return result;
-}
-
-//调用壳子缓存token
-common.setTokenCookie = function () {
-    if (common.isRunByApp) {
-        try {
-            //清空token值
-            sharedPref.save(function () {
-                //成功回调
-            }, function (error) {
-                showTips(error);
-                //失败回调
-            }, {
-                key: 'ACCESS_TOKEN',
-                str: ''
-            });
-
-        } catch (e) {
-            alert(e);
-            showTips(e);
-            console.log(e);
-        }
-    }
-}
-//事故申请进度状态值
-common.applicationProgress = {
-    '0': '申请',
-    '1': '律师电话指导',
-    '2': '待完善资料',
-    '3': '待匹配律师',
-    '4': '律师受理',
-    '5': '处理中',
-    '6': '理赔',
-    '7': '评价',
-    '8': '完成'
-}
 common.changeApplicationProgress = function (status) {
     return common.applicationProgress[status];
 }
@@ -860,138 +430,6 @@ common.imagePick = function (bIndex, init, callback) {
     });
 };
 
-common.popup = function (obj) {
-    if ($(obj).size() <= 0) {
-        return false;
-    }
-    if ($('.popup-bg').size() <= 0) {
-        var popupBg = '<div class="popup-bg"></div>';
-        $('body').append(popupBg);
-    }
-    ;
-
-    //$('.popup-box').hide();
-
-    $('.popup-bg').insertBefore($(obj));
-    $('.popup-bg').show();
-    /*.one('tap', function(){
-            common.closePopup(obj);
-        });*/
-
-    if ($(obj).hasClass('popup-confirm')) {
-        $('.popup-bg').css('z-index', 1009);
-    }
-    ;
-
-    $(obj).addClass('show').show();
-
-    $(obj).off('tap', '.popup-close');
-    $(obj).on('tap', '.popup-close', function () {
-        common.closePopup(obj);
-    });
-};
-common.closePopup = function (obj) {
-    if ($(obj).size() <= 0) {
-        return false;
-    }
-    $(obj).removeClass('show').animate({opacity: 0}, 350, function () {
-        $(this).hide().css('opacity', 1);
-    });
-    if ($('.popup-box.show').size() > 0) {
-        $('.popup-bg').insertBefore($('.popup-box.show'));
-        $('.popup-bg').css('z-index', 999);
-    } else {
-        $('.popup-bg').animate({opacity: 0}, 350, function () {
-            $(this).hide().css({
-                'opacity': 1,
-                'z-index': 999
-            });
-        });
-    }
-};
-
-/**
- * 获取指定省市区
- */
-common.getAddress = function (province, city, area) {
-    var address = fwddata.address;
-    var provinceObj = null, cityObj = null, areaObj = null;
-    provinceObj = common.getObjectByProps(address, 'code', province);
-    if (provinceObj) {
-        cityObj = common.getObjectByProps(provinceObj.cityList, 'code', city);
-        if (cityObj) {
-            areaObj = common.getObjectByProps(cityObj.areaList, 'code', area);
-        }
-    }
-    return (provinceObj && cityObj && areaObj) ? {province: provinceObj, city: cityObj, area: areaObj} : null;
-}
-
-/* 计算年龄 */
-common.getAge = function (strBirthday) {
-    if (!strBirthday) {
-        return '';
-    }
-
-    var returnAge;
-    var strBirthdayArr = strBirthday.split("-");
-    var birthYear = strBirthdayArr[0];
-    var birthMonth = strBirthdayArr[1];
-    var birthDay = strBirthdayArr[2];
-    var times;
-
-    if (common.isRunByApp) {
-        ServerTime.getServerTime(onSuccess, onFail);
-
-        function onSuccess(success) {
-            common.setLocalStorage('times', success.result_data);
-        }
-
-        function onFail() {
-        }
-    } else {
-        common.setLocalStorage('times', moment(new Date()).format('YYYY-MM-DD hh:mm:ss'));
-    }
-    var d = new Date(moment(common.getLocalStorage('times')).format('YYYY-MM-DD'));
-    var nowYear = d.getFullYear();
-    var nowMonth = d.getMonth() + 1;
-    var nowDay = d.getDate();
-    if (nowYear == birthYear) {
-        returnAge = 0;//同年 则为0岁
-    }
-    else {
-        var ageDiff = nowYear - birthYear; //年之差
-        if (ageDiff > 0) {
-            if (nowMonth == birthMonth) {
-                var dayDiff = nowDay - birthDay;//日之差
-                if (dayDiff < 0) {
-                    returnAge = ageDiff - 1;
-                } else {
-                    returnAge = ageDiff;
-                }
-            }
-            else {
-                var monthDiff = nowMonth - birthMonth;//月之差
-                if (monthDiff < 0) {
-                    returnAge = ageDiff - 1;
-                } else {
-                    returnAge = ageDiff;
-                }
-            }
-        } else {
-            returnAge = -1;//返回-1 表示出生日期输入错误 晚于今天
-        }
-    }
-    return returnAge;//返回周岁年龄
-}
-
-/* 千位分隔符 */
-common.separator = function (num) {
-    return num && num
-        .toString()
-        .replace(/(\d)(?=(\d{3})+\.)/g, function ($0, $1) {
-            return $1 + ",";
-        });
-};
 
 /* 转换表单Array为JSON */
 common.getFormJson = function (array) {
@@ -1001,33 +439,6 @@ common.getFormJson = function (array) {
     }
     ;
     return _json;
-}
-
-/* 金额转化为汉字单位 */
-common.SectionToChinese = function (num) {
-    var _num = String(num);
-    var _val = '';
-    switch (_num.length) {
-        case null:
-        case 'undefined':
-        case 0:
-            return '';
-            break;
-        case 1:
-        case 2:
-            return _num;
-            break;
-        case 3:
-            return _num / 100 + '百';
-            break;
-        case 4:
-            return _num / 1000 + '千';
-            break;
-        default:
-            return _num / 10000 + '万';
-            break;
-    }
-    return _val;
 }
 
 /**
@@ -1060,58 +471,6 @@ common.getArrIndexByProps = function (arr, propsKey, propsVal) {
         });
     }
     return rIndex;
-}
-
-/**
- * 拾万
- */
-common.largeAmountl = function( money ){
-    money = +money || 0;
-    if( money < 100000 ){
-        return common.separator(money);
-    }
-    return (common.separator(money/10000) + '万');
-}
-
-/**
- * 千位符号
- */
-common.separator = function (a) {
-    var arr = new Array();
-    var xiaoshu = "";  //用来记录参数小数数值包括小数点
-    var zhengshu ="";  //用来记录参数录整数数值
-    if(a<1000){    //当参数小于1000的时候直接返回参数
-        return a;
-    }else{
-        t = a.toString();   //将整数转换成字符串
-        if(t.indexOf('.')>0){   //如果参数存在小数，则记录小数部分与整数部分
-            var index = t.indexOf('.');
-            xiaoshu = t.slice(index,t.length);
-            xiaoshu = xiaoshu.slice(0, 4);
-            zhengshu = t.slice(0,index);
-        }else{   //否则整数部分的值就等于参数的字符类型
-            zhengshu = t;
-        }
-        var num = parseInt(zhengshu.length/3);   //判断需要插入千位分割符的个数
-
-        //将整数1234567890部分拆分为2部分，变量head:1   变量body:123456789
-        var head = zhengshu.slice(0,zhengshu.length-num*3);
-        if(head.length>0){  //如果head存在，则在head后面加个千位分隔符，
-            head += ',';
-        }
-        var body = zhengshu.slice(zhengshu.length-num*3,zhengshu.length);
-
-        //将body字符串123456789转换成一个字符数组arr2 = ['123','456','789']
-        var arr2 = new Array();
-        for(var i=0;i<num;i++){
-            arr2.push(body.slice(i*3,i*3+3));
-        }
-        body = arr2.join(',');   //将数组arr2通过join(',')   方法，拼接成一个以逗号为间隔的字符串
-
-        zhengshu = head + body;  //拼接整数部分
-        var result = zhengshu + xiaoshu;   //最后拼接整数和小数部分
-        return result;   //返回结果
-    }
 }
 
 

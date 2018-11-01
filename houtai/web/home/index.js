@@ -1,4 +1,4 @@
-var modelPage = null;
+var uaseinfo = null;
 
 
 define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap'], function (require, exports) {
@@ -8,50 +8,23 @@ define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap']
     $(window).bind("hashchange", $.loadPanel).trigger("hashchange");
     // 初始化进入页面href='http://localhost/web/home/'，此时不会触发hashchange事件，所以不会引入首页
 
-    // userInfo = common.getLocalStorage('userInfo', true) || '';
+    userInfo = common.getLocalStorage('userInfo', true) || '';
 
-    // if (!userInfo) {
-    //     common.alertCreate({
-    //         html: '<p>登录超时，请重新登录</p>',
-    //         callback: function () {
-    //             return window.location.href = '../login/login.html';
-    //         }
-    //     });
-    //     return false;
-    // } else {
+    if (!userInfo) {
+        common.confirm({
+            html: '登录超时，请重新登录',
+            callback: function(){
+                return window.location.href = '../login/login.html';
+
+            }
+        });
+        return false;
+    }else {
+        $('.header img').attr('src', '/phptest/images/' + userInfo.photo);
+        $('.header .uname').text(userInfo.nickname);
+    } 
       
-    } )
-
-// $.checkTime = function () {
-//     var tTime = 0;
-//     checkLogout = window.setInterval(function () {
-//         tTime++;
-//         if (tTime == 9000000000) {
-//             common.alertCreate({
-//                 html: '<p>长时间未操作，请重新登录！</p>',
-//                 callback: function () {
-//                     var paramData = {
-//                         ifOpenLoading: true,
-//                         url: 'insure/memeber/logout',
-//                         data: {
-//                             "loginName": userInfo.agentId
-//                         }
-//                     }
-//                     Interface.getAsynData(paramData, function (data) {
-//                         if (data.code == "000") {
-//                             return window.location.href = '../login/login.html';
-//                         }
-//                     }, function (error) {
-//                         common.alertCreate({
-//                             html: error.message
-//                         })
-//                     });
-//                 }
-//             });
-//             window.clearInterval(checkLogout);
-//         }
-//     }, 1000);
-// }
+    })
 
 $.pageInit = function () {
     
@@ -87,6 +60,15 @@ $.pageInit = function () {
             $('.wrapper').css('padding-left',45)
         }
     })
+    // 退出
+    common.bindEvent('click', '.header .sign-out', function($this){
+        common.confirmCreate({
+            html: '是否确认退出?',
+            callback: function(type){
+                if( type == 1 ) window.location.href = '../login/login.html';
+            }
+        })
+    })
 };
 
 $.loadPanel = function () {
@@ -102,6 +84,9 @@ $.loadPanel = function () {
         case undefined:
             $.showPanel('../online/home.js'); //首页
             break;
+        case 'informationduct':
+        $.showPanel('../online/informationduct.js'); //首页
+            break;    
     }
 
 };

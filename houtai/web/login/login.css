@@ -19,7 +19,7 @@ html,body,.wrapper {
     left: 50%;
     top: 50%;
     width: 500px;
-    height: 300px;
+    height: 360px;
     border-radius: 10px;
     border: 1px solid rgb(202,253,168);
     transform: translate(-50%,-50%);
@@ -56,4 +56,18 @@ html,body,.wrapper {
 .form h3 {
     text-align: center;
     color: green
+}
+#verify {
+    position: relative;
+    padding-right: 200px;
+}
+#verify canvas {
+    display: none;
+}
+#verify img {
+    position: absolute;
+    right: 9px;
+    top: -12px;
+    transform: scale(0.5);
+    border-radius: 5px; 
 }

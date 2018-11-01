@@ -17,9 +17,33 @@
     *zoom:1;/*IE/7/6*/
 
 }
+
+/* Dialog Toast 确认框
+*****************************************/
+.popup-toast{z-index: 10000;position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background-color:rgba(0,0,0,.7);border-radius:10px;}
+.popup-toast .toast-content{padding:15px 30px;max-width:300px;font-size:18px;color:#fff;word-break:break-all;}
+
+/* Popup
+*****************************************/
+.popup-bg{position:fixed;top:0;left:0;z-index:999;width:100%;height:100%;background-color:rgba(0,0,0,.5);}
+.popup-box{padding-bottom: 20px;position:fixed;top:50%;left:50%;min-width:300px;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);transform:translate(-50%,-50%);border-radius:10px;background-color:#fff}
+.popup-header{height:65px;line-height:65px;border-bottom:1px solid #d5d5d5;background-color:#f5f5f5;border-radius:10px 10px 0 0;text-align: center;}
+.popup-header h2{margin: 0;font-weight:400;line-height:64px;font-size:18px;color:#575757}
+.popup-content .text{max-width: 400px;text-align: center;padding: 20px}
+.popup-content .button{display: flex;justify-content: space-around}
+.popup-content .button button{display:inline-block;width:100px}
+
+
+.system-loading{position:fixed;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.4);z-index:999999}
+.system-loading p{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);-moz-transform:translate(-50%, -50%);transform:translate(-50%, -50%);width:204px;height:204px;background:url(../images/loading.gif) no-repeat left top}
+
+
+
+
 html,body {
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 .header {
@@ -40,19 +64,25 @@ html,body {
     line-height: 50px;
     text-align: center;
 }
+.header .logo a {
+    color: #fff;
+}
 .header .user li {
     float: right;
     height: 50px;
     margin-right: 20px;
     cursor: pointer;
 }
+.header .user a,
 .header .user i {
     display: block;
     /* vertical-align: middle; */
 }
+.header .user a {
+    height: 100%;
+}
 .header .user img {
     width: 30px;
-    vertical-align: middle;
 }
 .header .user i,
 .header .user img {
@@ -203,4 +233,31 @@ html,body {
 .show-hide-btn.current {
     right: -20px;
     border-radius:0 7px  7px  0;
+}
+.wrapper .main {
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+}
+
+/* 用户基本信息 */
+#informationduct {
+    padding: 30px 10px 0 30px;
+}
+
+#informationduct .i-nav {
+    height: 30px;
+    border-bottom: 1px solid rgb(194,226,252);
+}
+#informationduct .i-nav li {
+    width: 80px;
+    float: left;
+    line-height: 30px;
+    margin-right: 10px;
+    background-color: #f3f3f3;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+}
+#informationduct .i-nav .cur {
+    background-color: #c2e2fc;
 }
