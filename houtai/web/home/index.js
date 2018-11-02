@@ -65,7 +65,10 @@ $.pageInit = function () {
         common.confirmCreate({
             html: '是否确认退出?',
             callback: function(type){
-                if( type == 1 ) window.location.href = '../login/login.html';
+                if( type == 1 ) {
+                    common.removelocalStorage('userInfo');
+                    window.location.href = '../login/login.html';
+                }
             }
         })
     })

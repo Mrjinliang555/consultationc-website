@@ -261,3 +261,50 @@ html,body {
 #informationduct .i-nav .cur {
     background-color: #c2e2fc;
 }
+#informationduct .i-content {
+    width: 100%;
+}
+#informationduct .item {
+    display: flex;
+    padding-top: 30px;
+}
+#informationduct .item .img-part {
+    width: 20%;
+    text-align: center;
+}
+#informationduct .img-part img {
+    margin: 0px auto;
+    width: 150px;
+}
+#informationduct .img-part button {
+    margin-top: 20px;
+}
+#informationduct .item .info-part  {
+    width: 65%;
+}
+#informationduct .info-part div {
+    overflow: hidden;
+    padding: 20px 0;
+}
+#informationduct .info-part span{
+    float: left;
+    margin-right: 20px;
+    line-height: 38px
+}
+#informationduct .info-part .loop {
+    width: 100px;
+    text-align: right;
+    color: #777;
+}
+#informationduct .info-part  input {
+    float: left;
+    outline: none;
+    border: none;
+    width: 350px;
+    border: 1px solid #eee;
+    padding: 8px 10px;
+    
+}
+#informationduct .info-part button {
+    margin-left: 120px;
+}

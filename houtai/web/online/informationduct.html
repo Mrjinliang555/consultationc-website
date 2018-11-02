@@ -11,13 +11,36 @@
         </li>
     </ul>
     <ul class="i-content">
-        <li>
-
+        <li class="item">
+            <div class="img-part">
+                <img src="{{='/phptest/upload/' + it.photo}}" alt="">
+                <button class="btn btn-default" type="submit">编辑图片</button>
+            </div>
+            <div class="info-part">
+                <div>
+                    <span class="loop">用户名</span><span>{{=it.name}}</span>
+                </div>
+                <div>
+                    <span class="loop">笔名 </span><span>{{=it.nickname}}</span>
+                </div>
+                <div>
+                    <span class="loop">个人邮箱</span><input name="addr" type="text" value="{{=it.email||''}}">
+                </div>
+                <div>
+                    <span class="loop">手机号 </span><input name="addr" type="text" value="{{=it.phone||''}}">
+                </div>
+                <div>
+                    <span class="loop">联系地址</span><input name="addr" type="text" value="{{=it.addr||''}}">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-info">保存</button>
+                </div>
+            </div>
         </li>
-        <li>
+        <li class="item hide">
             
         </li>
-        <li>
+        <li class="item hide">
             
         </li>
 
