@@ -13,7 +13,7 @@ var Interface = Interface || {};
 
     //Interface.ss.token = 'ACCESS_TOKEN'; //token
 
-    var origin = '/phptest/houtai/';
+    var origin = '/mynameisljl/consultationc-website/phptest/houtai/';
     //用户平台信息
 
     //用户登录token
@@ -122,7 +122,7 @@ var Interface = Interface || {};
                 } else {
                     msg = '访问错误！';
                 }
-                common.Prompt(msg);
+                common.toast({html:msg});
                 //showTips(msg);
             }
         };

@@ -83,6 +83,7 @@ html,body {
 }
 .header .user img {
     width: 30px;
+    border-radius: 50%;
 }
 .header .user i,
 .header .user img {
@@ -282,21 +283,21 @@ html,body {
 #informationduct .item .info-part  {
     width: 65%;
 }
-#informationduct .info-part div {
+#informationduct .ui-form-row {
     overflow: hidden;
     padding: 20px 0;
 }
-#informationduct .info-part span{
+#informationduct .ui-form-row span{
     float: left;
     margin-right: 20px;
     line-height: 38px
 }
-#informationduct .info-part .loop {
+#informationduct .ui-form-row .loop {
     width: 100px;
     text-align: right;
     color: #777;
 }
-#informationduct .info-part  input {
+#informationduct .ui-form-row  input {
     float: left;
     outline: none;
     border: none;
@@ -305,6 +306,73 @@ html,body {
     padding: 8px 10px;
     
 }
-#informationduct .info-part button {
+#informationduct .ui-form-row button {
     margin-left: 120px;
+}
+#informationduct .select-part i {
+    padding-right: 5px
+}
+#informationduct .update-img {
+    padding-left: 80px;
+}
+#informationduct .select-part {
+    position: relative;
+}
+#informationduct .select-part input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 35px;
+    width: 95px;
+    overflow: hidden;
+    opacity: 0;
+}
+#informationduct .update-img .select-img {
+    background-color: rgb(111,136,156);
+    color: #fff;
+    height: 35px;
+    width: 100px;
+}
+#informationduct .select-part p {
+    margin-top: 10px;
+    font-size: 12px;
+}
+#informationduct .preview-part {
+    padding: 15px 0 30px;
+    display: flex;
+}
+#informationduct .preview-part .left{
+    width: 372px;
+    height: 280px;
+    border: 1px solid #d9d9d9;
+    background: #f0f0f0 url(../images/touxiang_quyu.jpg) no-repeat center center;
+}
+#informationduct .preview-part .right {
+    margin-left: 60px;
+}
+#informationduct .preview-part .right p {
+    text-align: center;
+    padding-top: 10px;
+}
+#informationduct .preview-part #previewyulan {
+    height: 120px;
+    width: 120px;
+    background: url(../images/img_120-120.gif) no-repeat center center;
+}
+.required {
+    position: relative;
+}
+.required:before {
+    content: "*";
+    color: red;
+}
+
+#newsclassification {
+    padding: 20px;
+}
+#newsclassification .content {
+    padding: 20px;
+}
+#newsclassification table {
+    width: 500px;
 }

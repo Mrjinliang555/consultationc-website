@@ -55,11 +55,12 @@
     <!-- menu bar -->
     <div class="menu-bar">
             <ul class="first-order">
-                <li><i class="glyphicon glyphicon-home"></i><span><p>首页管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li>
-                <li><i class="glyphicon glyphicon-envelope"></i><span><p>快讯管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li>
-                <li><i class="glyphicon glyphicon-screenshot"></i><span><p>行情管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
-                <li><i class="glyphicon glyphicon-cd"></i><span><p>数据管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
-                <li><i class="glyphicon glyphicon-gift"></i><span><p>活动管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+                <li data-default="./#page=newsclassification"><i class="glyphicon glyphicon-home"></i><span><p>首页管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li>
+                <li data-default="./#page="><i class="glyphicon glyphicon-envelope"></i><span><p>快讯管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li>
+                <li data-default="./#page="><i class="glyphicon glyphicon-screenshot"></i><span><p>行情管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+                <li data-default="./#page="><i class="glyphicon glyphicon-cd"></i><span><p>数据管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+                <li data-default="./#page="><i class="glyphicon glyphicon-gift"></i><span><p>活动管理</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
+                <li data-default="./#page=informationduct"><i class="glyphicon glyphicon-cog"></i><span><p>用户中心</p><em class="glyphicon glyphicon-menu-right"></em></span></li></li>
             </ul>
             <div class="secont-order">
                 <div class="title">
@@ -71,8 +72,8 @@
                 <ul class="big-nav">
                     <li class="item">
                         <ul class="small-nav">
-                            <li class="cur">轮播图管理</li>
-                            <li>新闻分类</li>
+                            <li data-link="./#page=newsclassification" class="cur">新闻分类</li>
+                            <li>轮播图管理</li>
                             <li></li>
                             <li></li>
                         </ul>
@@ -104,9 +105,12 @@
                     <li class="item">
                         <ul class="small-nav">
                             <li class="cur">活动管理</li>
-                            <li>活动管理</li>
-                            <li></li>
-                            <li></li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <ul class="small-nav">
+                            <li class="cur" data-link="./#page=informationduct">基础信息</li>
+                            <li data-link="./#page=informationduct">基础信息</li>
                         </ul>
                     </li>
                 </ul>
@@ -142,7 +146,8 @@
             'base64': 'lib/base64',
             'swiper': 'lib/swiper.min',
             'echarts': 'lib/echarts.min',
-            'bootstrap': 'lib/bootstrap.min'
+            'bootstrap': 'lib/bootstrap.min',
+            'cropper': 'lib/cropper.min'
         },
         paths: {},
         preload: [

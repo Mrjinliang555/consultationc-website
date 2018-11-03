@@ -20,7 +20,7 @@ define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap']
         });
         return false;
     }else {
-        $('.header img').attr('src', '/phptest/upload/' + userInfo.photo);
+        $('.header img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/' + userInfo.photo);
         $('.header .uname').text(userInfo.nickname);
     } 
       
@@ -29,23 +29,23 @@ define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap']
 $.pageInit = function () {
     
 // 切换一级标题
-    common.bindEvent('click', '.menu-bar .first-order li', function($this){
-        if( $this.hasClass('active') ) return;
+    common.bindEvent('click', '.menu-bar .first-order li:not(.active)', function($this){
         if( !window.onlyInitOnec ) {
             window.onlyInitOnec = true;
-            $('.menu-bar .secont-order').css('left',0);
-            $('.wrapper').css('padding-left',207)
+           $('.menu-bar .show-hide-btn').addClass('current');
         }
         $this.addClass('active').siblings().removeClass('active');
         $('.menu-bar .secont-order .title').text( $this.find('p').text() );
         var idx = $this.index();
         $('.menu-bar .secont-order .item').eq(idx).show().siblings().hide();
+        return window.location.href =  $this.data('default');
     })
 
     // 切换二级标题
-    common.bindEvent('click', '.menu-bar .small-nav li', function($this){
+    common.bindEvent('click', '.menu-bar .small-nav li:not(.cur)', function($this){
         if( $this.hasClass('cur') ) return;
         $this.addClass('cur').siblings().removeClass('cur');
+        return window.location.href =  $this.data('link');
     })
 
     //展开与隐藏
@@ -88,8 +88,11 @@ $.loadPanel = function () {
             $.showPanel('../online/home.js'); //首页
             break;
         case 'informationduct':
-        $.showPanel('../online/informationduct.js'); //首页
-            break;    
+        $.showPanel('../online/informationduct.js'); //基础信息
+            break; 
+        case 'newsclassification':
+        $.showPanel('../online/newsclassification.js'); //基础信息
+            break;   
     }
 
 };

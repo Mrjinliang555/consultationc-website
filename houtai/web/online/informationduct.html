@@ -13,35 +13,66 @@
     <ul class="i-content">
         <li class="item">
             <div class="img-part">
-                <img src="{{='/phptest/upload/' + it.photo}}" alt="">
+                <img src="{{='/mynameisljl/consultationc-website/phptest/upload/' + it.photo}}" alt="">
                 <button class="btn btn-default" type="submit">编辑图片</button>
             </div>
             <div class="info-part">
-                <div>
+                <div class="ui-form-row">
                     <span class="loop">用户名</span><span>{{=it.name}}</span>
                 </div>
-                <div>
+                <div class="ui-form-row">
                     <span class="loop">笔名 </span><span>{{=it.nickname}}</span>
                 </div>
-                <div>
-                    <span class="loop">个人邮箱</span><input name="addr" type="text" value="{{=it.email||''}}">
+                <div class="ui-form-row">
+                    <span class="loop">个人邮箱</span><input name="email" type="text" value="{{=it.email||''}}">
                 </div>
-                <div>
-                    <span class="loop">手机号 </span><input name="addr" type="text" value="{{=it.phone||''}}">
+                <div class="ui-form-row">
+                    <span class="loop required">手机号</span><input name="phone" type="text" value="{{=it.phone||''}}">
                 </div>
-                <div>
+                <div class="ui-form-row">
                     <span class="loop">联系地址</span><input name="addr" type="text" value="{{=it.addr||''}}">
                 </div>
-                <div>
+                <div class="ui-form-row">
                     <button type="button" class="btn btn-info">保存</button>
                 </div>
             </div>
         </li>
         <li class="item hide">
-            
+            <div class="update-img">
+                <div class="select-part">
+                    <button class="select-img"><i class="glyphicon glyphicon-open"></i>本地上传</button>
+                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg">
+                    <p>仅支持JPG、PNG图片文件，且文件大小小于2M</p>
+                </div>
+                <div class="preview-part">
+                    <div class="left">
+                        <img id="preview" style="width: 100%; height: 100%;" class="imgCover">
+                    </div>
+                    <div class="right">
+                        <img src="" id="previewyulan" alt="">
+                        <p>120x120像素</p>
+                    </div>
+                </div>
+                <div>
+                    <button id="saveUserPhoto" type="button" class="btn btn-info">保存</button> 
+                </div>
+            </div>
         </li>
         <li class="item hide">
-            
+            <div class="password-part">
+                <div class="ui-form-row">
+                    <span class="loop">原密码</span><input class="old-pwd" type="password">
+                </div>
+                <div class="ui-form-row">
+                    <span class="loop">新密码</span><input class="new-pwd" type="password">
+                </div>
+                <div class="ui-form-row">
+                    <span class="loop">确认密码</span><input class="repeat-pwd" type="password">
+                </div>
+                <div class="ui-form-row">
+                    <button type="button" class="btn btn-info">保存</button>
+                </div>
+            </div>
         </li>
 
     </ul>
