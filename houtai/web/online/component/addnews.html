@@ -1,0 +1,51 @@
+<div class="alert-popup-bg">
+        <div id="addnews" class="scroll-box">
+                <button class="close-btn remove-btn"><i class="glyphicon glyphicon-remove"></i></button>
+                <div class="ui-form-row">
+                    <span class="loop">文章标题</span><input style="width:75%" class="ordinary" type="text" name="title">
+                </div>
+                <div class="long">
+                    <div class="ui-form-row custom">
+                        <span class="loop">独家信息</span>
+                        <input type="radio" name="only" value="0" checked>否
+                        <input type="radio" name="only" value="1">是
+                    </div>
+                    <div class="ui-form-row custom">
+                        <span class="loop">文章状态</span>
+                        <input type="radio" name="status" value="1" checked>已发布
+                        <input type="radio" name="status" value="0">草稿
+                    </div>
+                </div>
+                <div class="long">
+                    <div class="ui-form-row">
+                        <span class="loop">所属分类</span>
+                        <select name="" id="">
+                            <option disabled selected>请选择分类</option>
+                            {{~it.newsList :val:idx}}
+                            <option value="{{=val.type}}">{{=val.name}}</option>
+                            {{~}}
+                        </select>
+                    </div>
+                    <div class="ui-form-row">
+                        <span class="loop">有效时间</span><input class="ordinary" placeholder="永久有效" id="effectiveTime" type="text">
+                    </div> 
+                </div>
+                <div class="ui-form-row custom">
+                    <span class="loop">置顶</span>
+                    <input type="radio" name="top" value="0" checked>否
+                    <input type="radio" name="top" value="1">是
+                </div>
+                <div id="summernote">编辑内容</div>
+                <div class="btns clearfix">
+                    <button class="btn btn-default fl remove-btn">取消</button>
+                    <button class="btn btn-success btn-release fr">发布</button>
+                    <div class="fr set-time-btns">
+                        定时发布<input type="checkbox">
+                    </div>
+                    <div id="set-time-item" class="fr set-time-btns hide">
+                        日期<input class="set-time-hour" id="effectiveTimeOfData" type="text">
+                        时间<input class="set-time-date" id="effectiveTimeOfHour" type="text" value="">
+                    </div>
+                </div>
+            </div>
+    </div>

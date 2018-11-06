@@ -20,7 +20,8 @@ define(['seajsText', 'seajsCss',  'doT', 'interface', 'validation', 'bootstrap']
         });
         return false;
     }else {
-        $('.header img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/' + userInfo.photo);
+        // $('.header img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/' + userInfo.photo);
+        $('.header img').attr('src', '/xt-website/consultationc-website/phptest/upload/' + userInfo.photo);
         $('.header .uname').text(userInfo.nickname);
     } 
       
@@ -93,6 +94,12 @@ $.loadPanel = function () {
         case 'newsclassification':
         $.showPanel('../online/newsclassification.js'); //基础信息
             break;   
+        case 'bannermanage':
+        $.showPanel('../online/bannermanage.js'); //轮播图管理
+            break; 
+        case 'infodiffusion':
+        $.showPanel('../online/infodiffusion.js'); //信息发布
+            break; 
     }
 
 };

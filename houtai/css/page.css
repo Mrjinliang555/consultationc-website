@@ -18,6 +18,52 @@
 
 }
 
+.scroll-box::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+/*正常情况下滑块的样式*/
+
+.scroll-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.05);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+
+/*鼠标悬浮在该类指向的控件上时滑块的样式*/
+
+.scroll-box:hover::-webkit-scrollbar-thumb {
+   background-color: rgba(0,0,0,.2);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+
+}
+
+/*鼠标悬浮在滑块上时滑块的样式*/
+
+.scroll-box::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0,0,0,.4);
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1);
+}
+
+/*正常时候的主干部分*/
+
+.scroll-box::-webkit-scrollbar-track {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
+    background-color: white;
+}
+
+/*鼠标悬浮在滚动条上的主干部分*/
+
+.scroll::-webkit-scrollbar-track:hover {
+
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.01);
+
+}
+
 /* Dialog Toast 确认框
 *****************************************/
 .popup-toast{z-index: 10000;position:fixed;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);transform:translate(-50%,-50%);background-color:rgba(0,0,0,.7);border-radius:10px;}
@@ -25,7 +71,7 @@
 
 /* Popup
 *****************************************/
-.popup-bg{position:fixed;top:0;left:0;z-index:999;width:100%;height:100%;background-color:rgba(0,0,0,.5);}
+.alert-popup-bg,.popup-bg{position:fixed;top:0;left:0;z-index:1111;width:100%;height:100%;background-color:rgba(0,0,0,.5);}
 .popup-box{padding-bottom: 20px;position:fixed;top:50%;left:50%;min-width:300px;-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);transform:translate(-50%,-50%);border-radius:10px;background-color:#fff}
 .popup-header{height:65px;line-height:65px;border-bottom:1px solid #d5d5d5;background-color:#f5f5f5;border-radius:10px 10px 0 0;text-align: center;}
 .popup-header h2{margin: 0;font-weight:400;line-height:64px;font-size:18px;color:#575757}
@@ -283,30 +329,31 @@ html,body {
 #informationduct .item .info-part  {
     width: 65%;
 }
-#informationduct .ui-form-row {
+ .ui-form-row {
     overflow: hidden;
     padding: 20px 0;
 }
-#informationduct .ui-form-row span{
+ .ui-form-row span{
     float: left;
     margin-right: 20px;
     line-height: 38px
 }
-#informationduct .ui-form-row .loop {
+ .ui-form-row .loop {
     width: 100px;
     text-align: right;
     color: #777;
 }
-#informationduct .ui-form-row  input {
+ .ui-form-row  .ordinary {
     float: left;
     outline: none;
     border: none;
     width: 350px;
-    border: 1px solid #eee;
+    border: 1px solid #999;
     padding: 8px 10px;
+    border-radius: 5px;
     
 }
-#informationduct .ui-form-row button {
+ .ui-form-row button {
     margin-left: 120px;
 }
 #informationduct .select-part i {
@@ -366,7 +413,6 @@ html,body {
     content: "*";
     color: red;
 }
-
 #newsclassification {
     padding: 20px;
 }
@@ -374,5 +420,141 @@ html,body {
     padding: 20px;
 }
 #newsclassification table {
-    width: 500px;
+    width: 600px;
+}
+
+#bannermanage {
+    padding: 20px;
+}
+#bannermanage table img {
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.popup-bg #addBannerTmp {
+    width: 800px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 30px 20px 20px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+.popup-bg input {
+    border: 1px solid #777;
+    height: 35px;
+    width: 100%;
+    display: block;
+    padding-left: 20px;
+    border-radius: 5px;
+}
+.popup-bg .loop {
+    padding: 10px 20px;
+    position: relative;
+}
+.popup-bg .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.popup-bg #picture-preview {
+    width: 300px;
+    height: 175px;
+    border: 1px solid #d9d9d9;
+    background: #f0f0f0 url(../images/touxiang_quyu.jpg) no-repeat center center;
+}
+.popup-bg .left-part {
+    width: 50%;
+}
+.popup-bg .right-part {
+    width: 50%;
+} 
+.popup-bg .loop .file-btn {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 100px;
+    overflow: hidden;
+    opacity: 0;
+}
+.popup-bg .add {
+    padding-top: 40px;
+    text-align: right;
+    padding-right: 100px;
+    width: 100%;
+}
+.popup-bg .add button {
+    margin-left: 20px;
+}
+#addnews {
+    padding: 40px 40px 40px 40px;
+    width: 900px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    height: 80%;
+    overflow-y: auto;
+}
+#addnews .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+#addnews .btns button {
+    /* padding-left: 100px; */
+    margin-left:40px;
+}
+#addnews .long {
+    width: 100%;
+    display: flex;
+}
+#addnews .long .ui-form-row {
+    width: 50%;
+}
+#addnews .custom {
+    line-height: 39px;
+}
+
+#addnews .note-editor.note-frame {
+    margin-left: 39px;
+}
+#addnews input[type=radio] {
+    position: relative;
+    top: 1px;
+    margin-left: 20px;
+}
+#addnews select {
+    height: 35px;;
+    border: 1px solid #999;
+    width: 180px;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+#infodiffusion {
+    padding: 20px;
+}
+#effectiveTime {
+    float: left;
+    width: 150px;
+}
+.set-time-btns {
+    padding-top: 7px;
+    font-size: 12px;
+    padding-left: 20px;
+}
+.set-time-btns input{
+    border: 1px solid #ccc;
+    margin-left: 5px;
+}
+.set-time-btns input[type=text] {
+    width: 100px;
+}
+.set-time-btns input[type=checkbox] {
+    position: relative;
+    top: 3px;
 }

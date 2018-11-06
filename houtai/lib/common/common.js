@@ -12,9 +12,22 @@ common.bindEvent = function (events, selector, callback) {
     });
 }
 
+common.renderNav = function(first,second,three){
+    first = first || 0;
+    second = second || 0;
+    $('.menu-bar .first-order li').eq(first).addClass('active').siblings().removeClass('active');
+    $('.menu-bar .secont-order .item').eq(second).show().siblings().hide();
+    if( three ) $('.menu-bar .item li').eq(three).addClass('cur').siblings().removeClass('cur');
+    if( !window.onlyInitOnec ) {
+        window.onlyInitOnec = true;
+       $('.menu-bar .show-hide-btn').addClass('current');
+    }
+}
+
 common.confirmCreate = function (params) {
     var options = {
         html: params.html,
+        title: params.title,
         callback: function (number) {
         }
     };
@@ -24,7 +37,7 @@ common.confirmCreate = function (params) {
     <div class="popup-bg">\
 		<div class="popup-box popup-confirm">\
 			<div class="popup-header">\
-                <h2>提示</h2>\
+                <h2>'+ (pa.title|| "提示") +'</h2>\
 			</div>\
 			<div class="popup-content">\
 				<div class="text">' + pa.html + '</div>\
@@ -40,7 +53,7 @@ common.confirmCreate = function (params) {
         $('.popup-bg').remove();
     });
     $('.btn-confirm-confirm').one('click', function () {
-        $.isFunction(pa.callback) && pa.callback(1);
+        $.isFunction(pa.callback) && pa.callback(1,$(this));
         $('.popup-bg').remove();
     });
 };

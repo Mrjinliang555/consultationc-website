@@ -1,24 +1,33 @@
 <div id="newsclassification">
-    <h3>新闻分类</h3>
+    <p>新闻分类</p>
     <div class="content">
         <table class="table table-bordered">
             <thead width="100%">
-                <th width="20%">序号</th>
-                <th width="60%">名称</th>
-                <th width="20%">排列顺序</th>
+                <th width="10%">序号</th>
+                <th width="10%">标识符</th>
+                <th width="50%">分类名称</th>
+                <th width="30%">操作</th>
             </thead>
             <tbody>
+                {{~it.list :value:index }}
                 <tr>
-                    <td width="20%">1</td>
-                    <td width="60%">1</td>
-                    <td width="20%">1</td>
+                    <td width="10%">{{=index+1}}</td>
+                    <td width="10%">{{=value.type}}</td>
+                    <td width="50%"><input type="text" value="{{=value.name}}" readonly></td>
+                    <td width="30%">
+                        <button data-id="{{=value.id}}" type="button" class="btn btn-primary" >
+                               编辑
+                        </button>
+                        <button data-id="{{=value.id}}" class="btn btn-danger delete-item">删除</button>
+                    </td>
                 </tr>
-                <tr>
-                    <td width="20%">1</td>
-                    <td width="60%">1</td>
-                    <td width="20%">1</td>
-                </tr>
+                {{~}}
             </tbody>
         </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary add-sort" >
+                <i class="glyphicon glyphicon-plus-sign"></i> 添加分类
+        </button>
     </div>
 </div>

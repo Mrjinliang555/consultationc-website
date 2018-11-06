@@ -4,7 +4,8 @@ header('content-type:text/html;charset=utf-8');
 
 define('ROOT','127.0.0.1');
 define('UNM','root');
-define('UPWD','root');
+// define('UPWD','root');
+define('UPWD','nishisb');
 define('TBNM','news-websit');
 
 
@@ -73,6 +74,22 @@ function create_guid($namespace = '') {
         '-' .
         substr($hash, 20, 12) .
         '}';
+    return $guid;
+   }
+
+   //生成唯一分类；
+function create_type($namespace = '') { 
+    static $guid = '';
+    $uid = uniqid("", true);
+    $data = $namespace;
+    $data .= $_SERVER['REQUEST_TIME'];
+    $data .= $_SERVER['HTTP_USER_AGENT'];
+    $data .= @$_SERVER['LOCAL_ADDR'];
+    $data .= @$_SERVER['LOCAL_PORT'];
+    $data .= $_SERVER['REMOTE_ADDR'];
+    $data .= $_SERVER['REMOTE_PORT'];
+    $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
+    $guid = substr($hash, 0, 8).substr($hash, 8, 4).substr($hash, 12, 4);
     return $guid;
    }
 

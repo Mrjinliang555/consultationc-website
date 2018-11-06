@@ -17,6 +17,8 @@ define(function (require, exports, module) {
             init: function (opt) {
                 var t = this;
                 t.obj = opt.body;
+                // 渲染左边菜单
+                common.renderNav(5,5);
                 t.render();
                 t.bindEvents();
     
@@ -24,12 +26,6 @@ define(function (require, exports, module) {
             render: function () {
                 var t = this;
                 t.obj.html(template(userInfo));
-                $('.menu-bar .first-order li').eq(5).addClass('active').siblings().removeClass('active');
-                $('.menu-bar .secont-order .item').eq(5).show().siblings().hide();
-                if( !window.onlyInitOnec ) {
-                    window.onlyInitOnec = true;
-                   $('.menu-bar .show-hide-btn').addClass('current');
-                }
             },
             bindEvents: function(){
 
@@ -191,8 +187,10 @@ define(function (require, exports, module) {
                         console.log( res )
                         if( res.code == "000" ){
                             // userInfo = res.data;
-                            $('#informationduct .img-part img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/'+res.data.photo);
-                            $('.header img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/' + res.data.photo);
+                            // $('#informationduct .img-part img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/'+res.data.photo);
+                            // $('.header img').attr('src', '/mynameisljl/consultationc-website/phptest/upload/' + res.data.photo);
+                            $('#informationduct .img-part img').attr('src', '/xt-website/consultationc-website/phptest/upload/'+res.data.photo);
+                            $('.header img').attr('src', '/xt-website/consultationc-website/phptest/upload/' + res.data.photo);
                             $('#informationduct .item').eq(0).removeClass('hide').siblings().addClass('hide');
                             $('#informationduct .i-nav li').eq(0).addClass('cur').siblings().removeClass('cur');
                             common.toast({html: '上传成功！'})

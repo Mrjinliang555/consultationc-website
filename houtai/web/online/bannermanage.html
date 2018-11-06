@@ -1,0 +1,35 @@
+<div id="bannermanage">
+    <p>轮播图管理</p>
+    <div class="content">
+        <table class="table table-bordered">
+            <thead width="100%">
+                <th width="5%">序号</th>
+                <th width="15%">链接地址</th>
+                <th width="15%">图片标题</th>
+                <th width="20%">图片预览</th>
+                <th width="12%">操作</th>
+            </thead>
+            <tbody>
+                {{~it.list :value:index}}
+                <tr>
+                    <td width="5%">{{=index+1}}</td>
+                    <td width="15%">{{=value.link}}</td>
+                    <td width="15%">{{=value.title}}</td>
+                    <td width="20%">
+                        <img src="{{='/xt-website/consultationc-website/phptest/upload/' + value.imgsrc}}" alt="">
+                    </td>
+                    <td width="12%" data-id="{{=value.id}}">
+                        <button  type="button" class="btn btn-primary" >编辑</button>
+                        <button class="btn btn-danger delete-item">删除</button>
+                    </td>
+                </tr>
+                {{~}}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary add-sort" >
+            <i class="glyphicon glyphicon-plus-sign"></i> 添加广告
+        </button>
+    </div>
+</div>

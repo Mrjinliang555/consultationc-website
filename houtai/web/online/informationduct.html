@@ -13,7 +13,8 @@
     <ul class="i-content">
         <li class="item">
             <div class="img-part">
-                <img src="{{='/mynameisljl/consultationc-website/phptest/upload/' + it.photo}}" alt="">
+                <!-- <img src="{{='/mynameisljl/consultationc-website/phptest/upload/' + it.photo}}" alt=""> -->
+                <img src="{{='/xt-website/consultationc-website/phptest/upload/' + it.photo}}" alt="">
                 <button class="btn btn-default" type="submit">编辑图片</button>
             </div>
             <div class="info-part">
@@ -24,13 +25,13 @@
                     <span class="loop">笔名 </span><span>{{=it.nickname}}</span>
                 </div>
                 <div class="ui-form-row">
-                    <span class="loop">个人邮箱</span><input name="email" type="text" value="{{=it.email||''}}">
+                    <span class="loop">个人邮箱</span><input class="ordinary" name="email" type="text" value="{{=it.email||''}}">
                 </div>
                 <div class="ui-form-row">
-                    <span class="loop required">手机号</span><input name="phone" type="text" value="{{=it.phone||''}}">
+                    <span class="loop required">手机号</span><input class="ordinary" name="phone" type="text" value="{{=it.phone||''}}">
                 </div>
                 <div class="ui-form-row">
-                    <span class="loop">联系地址</span><input name="addr" type="text" value="{{=it.addr||''}}">
+                    <span class="loop">联系地址</span><input class="ordinary" name="addr" type="text" value="{{=it.addr||''}}">
                 </div>
                 <div class="ui-form-row">
                     <button type="button" class="btn btn-info">保存</button>
@@ -61,13 +62,13 @@
         <li class="item hide">
             <div class="password-part">
                 <div class="ui-form-row">
-                    <span class="loop">原密码</span><input class="old-pwd" type="password">
+                    <span class="loop">原密码</span><input class="old-pwd ordinary" type="password">
                 </div>
                 <div class="ui-form-row">
-                    <span class="loop">新密码</span><input class="new-pwd" type="password">
+                    <span class="loop">新密码</span><input class="new-pwd ordinary" type="password">
                 </div>
                 <div class="ui-form-row">
-                    <span class="loop">确认密码</span><input class="repeat-pwd" type="password">
+                    <span class="loop">确认密码</span><input class="repeat-pwd ordinary" type="password">
                 </div>
                 <div class="ui-form-row">
                     <button type="button" class="btn btn-info">保存</button>
