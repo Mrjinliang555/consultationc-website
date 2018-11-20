@@ -6,20 +6,25 @@
                 </div>
                 <div class="long">
                     <div class="ui-form-row custom">
-                        <span class="loop">独家信息</span>
-                        <input type="radio" name="only" value="0" checked>否
-                        <input type="radio" name="only" value="1">是
+                        <span class="loop">原创内容</span>
+                        <input type="radio" name="only" value="0">否
+                        <input type="radio" name="only" value="1" checked>是
                     </div>
                     <div class="ui-form-row custom">
                         <span class="loop">文章状态</span>
-                        <input type="radio" name="status" value="1" checked>已发布
                         <input type="radio" name="status" value="0">草稿
+                        <input type="radio" name="status" value="1" checked>已发布
                     </div>
                 </div>
+                
+                <div class="ui-form-row hide" id="source">
+                    <span class="loop">文章来源</span><input class="ordinary" name="source" placeholder="请输入文章来源" type="text">
+                </div>
+                
                 <div class="long">
                     <div class="ui-form-row">
                         <span class="loop">所属分类</span>
-                        <select name="" id="">
+                        <select name="category" id="">
                             <option disabled selected>请选择分类</option>
                             {{~it.newsList :val:idx}}
                             <option value="{{=val.type}}">{{=val.name}}</option>
@@ -32,8 +37,8 @@
                 </div>
                 <div class="ui-form-row custom">
                     <span class="loop">置顶</span>
-                    <input type="radio" name="top" value="0" checked>否
-                    <input type="radio" name="top" value="1">是
+                    <input type="radio" name="istop" value="0" checked>否
+                    <input type="radio" name="istop" value="1">是
                 </div>
                 <div id="summernote">编辑内容</div>
                 <div class="btns clearfix">
