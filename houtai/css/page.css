@@ -490,7 +490,7 @@ html,body {
 }
 #addnews {
     padding: 40px 40px 40px 40px;
-    width: 900px;
+    width: 90%;
     background-color: #fff;
     position: absolute;
     left: 50%;
@@ -534,10 +534,78 @@ html,body {
     border-radius: 5px;
     padding-left: 15px;
 }
+#addnews #keylabel {
+    z-index: 33;
+    position: relative;
+    padding: 20px 0 30px;
+}
+#addnews #keylabel .clearfix {
+    position: relative;
+    display: inline-block;
+}
+#addnews #keylabel i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 66;
+}
+#addnews .add-key-word {
+    width: 500px;
+    height: 27px;
+    background: #fff;
+    position: absolute;
+    left: 120px;
+    top: 59px;
+    padding-top: 4px;
+}
+#addnews .add-key-word input {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 0 8px;
+}
+#addnews .add-key-word button {
+    margin-left: 10px;
+    padding: 0 ;
+    padding: 2px 5px;
+}
+#addnews .keyword-box {
+    width: 500px;
+    height: 36px;
+    position: absolute;
+    left: 120px;
+    top: 21px;
+    z-index: 33;
+    padding-top: 8px;
+}
+#addnews .keyword-box li {
+    float: left;
+    background: #ddd;
+    border-radius: 3px;
+    margin-left: 10px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 5px
+}
+#addnews .keyword-box span {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    margin-right: 5px;
+}
+#addnews .keyword-box em {
+    color: #fff;
+    position: relative;
+    top: -1px;
+    cursor: pointer;
+}
+
 
 #infodiffusion {
     padding: 20px;
 }
+
 #effectiveTime {
     float: left;
     width: 150px;

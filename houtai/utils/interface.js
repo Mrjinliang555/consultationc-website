@@ -14,7 +14,7 @@ var Interface = Interface || {};
     //Interface.ss.token = 'ACCESS_TOKEN'; //token
 
     // var origin = '/mynameisljl/consultationc-website/phptest/houtai/';
-    var origin = '/xt-website/consultationc-website/phptest/houtai/';
+    var origin = '../../../phptest/houtai/';
     //用户平台信息
 
     //用户登录token

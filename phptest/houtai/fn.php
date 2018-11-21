@@ -4,8 +4,8 @@ header('content-type:text/html;charset=utf-8');
 
 define('ROOT','127.0.0.1');
 define('UNM','root');
-// define('UPWD','root');
-define('UPWD','nishisb');
+define('UPWD','root');
+// define('UPWD','nishisb');
 define('TBNM','news-websit');
 
 

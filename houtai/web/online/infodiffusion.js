@@ -19,6 +19,7 @@ define(function (require, exports, module) {
                 t.obj = opt.body;
                 t.newsList = common.getLocalStorage("newsList", true) || [];
                 t.userInfo = common.getLocalStorage("userInfo", true) || [];
+                t.keyWordArr = [];
                  // 渲染左边菜单
                 common.renderNav(0,0,2);
                 t.render();
@@ -39,7 +40,6 @@ define(function (require, exports, module) {
                     }
                    
                     var parmeat = {},$form = $("#addnews");
-
 
                     // 文章标题
                     parmeat.title = $form.find('[name=title]').val().trim();
@@ -73,19 +73,19 @@ define(function (require, exports, module) {
                     // 是否置顶
                     parmeat.isTop = $form.find('[name=istop]:checked').val();
                      // 有效时间
-                    parmeat.effectiveTime = $form.find('#effectiveTime').val().trim() || '4693996800000';
+                    parmeat.effectiveTime = $form.find('#effectiveTime').val().trim() || '2118-11-23';
 
-                    if( parmeat.effectiveTime !== '4693996800000'  ){
+                    if( parmeat.effectiveTime !== '2118-11-23'  ){
                         var now = new Date();
                         // console.log(new Date(parmeat.effectiveTime).getHours());
-                        parmeat.effectiveTime = (new Date(parmeat.effectiveTime))/1;
-                        if( (parmeat.effectiveTime - now) < 86400000){
+                        var timeF = (new Date(parmeat.effectiveTime))/1;
+                        if( (timeF - now) < 86400000){
                             common.toast({html:'有效时间最少为一天'});
                             return false;
                         }
+                        
                     }
                   
-
                     // 是否为定时发布
                     parmeat.isTiming = $('.set-time-btns input').prop('checked');
                     var now1 = new Date();
@@ -106,12 +106,23 @@ define(function (require, exports, module) {
                             common.toast({html:'定时时间不得小于一小时'});
                             return false;
                         }
-                        parmeat.creatTime = timeNumber/1;
+                        parmeat.creatTime = date + " " + hour;
                     }else {
-                        parmeat.creatTime = now1/1;
+                        parmeat.creatTime = "";
                     }
                     parmeat.author = t.userInfo.nickname;
-                    console.log( parmeat )
+                    parmeat.authorPto = t.userInfo.photo;
+                    parmeat.keyWord = t.keyWordArr.join();
+                   
+                    Interface.getAsynData({
+                        url: 'savearticle.php',
+                        data: parmeat,
+                        type: 'post'
+                    }, function(res){
+                        console.log(res)
+                    },function(err){
+                        console.log(err)
+                    })
 
                 })
                 common.bindEvent("click", "#infodiffusion .add-article", function($this){
@@ -140,6 +151,40 @@ define(function (require, exports, module) {
                     }else {
                         $('#addnews #source').removeClass('hide');
                     }
+                });
+
+                common.bindEvent("click", "#addnews .add-key-word-btn", function($this){
+                    $("#keylabel .add-key-word").toggleClass("hide");
+                });
+
+                common.bindEvent("click", "#addnews .add-keyword-btn", function($this){
+                    if( t.keyWordArr.length === 4 ){
+                        common.toast({html:'最多只能添加4组关键词'});
+                        return false;
+                    }
+                    var $parent = $("#keylabel");
+                    var str = $parent.find('.add-key-word input').val().trim();
+                    if( str.length > 0 || str.length > 8){
+                        t.keyWordArr.push( str );
+                        $parent.find('.keyword-box').append('<li><span>' + str + '</span><em>x</em></li>');
+                        $parent.find('input').val('');
+                    }else {
+                        common.toast({html:'关键词长度在8个字符以内'});
+                        return false;
+                    }
+                    $parent.find('.add-key-word').addClass('hide'); 
+                });
+
+                common.bindEvent("click", "#addnews .keyword-box em", function($this){
+                    var idx = $this.index();
+                    $this.parent().remove();
+                    if(  t.keyWordArr.length === 1 ){
+                        t.keyWordArr.length = [];
+                    }else {
+                        t.keyWordArr.splice(idx,1);
+                    }
+                    console.log(  t.keyWordArr );
+                   
                 });
 
             },
