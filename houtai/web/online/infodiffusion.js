@@ -1,8 +1,10 @@
 define(function (require, exports, module) {
     // require('moment');
+    require('../../css/cropper.min.css');
     require('../../css/summernote.css');
     require('summernote');
     require('laydate');
+    require('cropper');
 
     var template = require('./infodiffusion.html');
     template = doT.template(template);
@@ -27,7 +29,13 @@ define(function (require, exports, module) {
             },
             render: function () {
                 var t = this;
-                t.obj.html(template());
+                Interface.getAsynData({
+                    url: 'queryarticle.php',
+                }, function(res){
+                    t.obj.html(template());
+                },function(err){
+                    console.log(err)
+                })
             },
             bindEvents: function(){
                 var t = this;
@@ -113,13 +121,32 @@ define(function (require, exports, module) {
                     parmeat.author = t.userInfo.nickname;
                     parmeat.authorPto = t.userInfo.photo;
                     parmeat.keyWord = t.keyWordArr.join();
-                   
+
+                    var $img = $("#picture-preview-fengmian");
+                    
+                    if( $img.length ){
+                        var $imgData=$img.cropper('getCroppedCanvas');
+                        parmeat.coverImg = $imgData.toDataURL('image/png');  //dataurl便是base64图片
+                    }else {
+                        parmeat.coverImg = "";
+                    }
+
                     Interface.getAsynData({
                         url: 'savearticle.php',
                         data: parmeat,
                         type: 'post'
                     }, function(res){
-                        console.log(res)
+                        if( res.code == "000" ){
+                            $('.alert-popup-bg').remove();
+                            common.toast({html: '添加成功！'})
+                            // $form.find('form')[0].reset();
+                            // $form.find('#source').addClass('hide');
+                            // $form.find('#set-time-item').addClass('hide');
+                            // $form.find('.panel-body').text('');
+                            // t.keyWordArr = [];
+                            // $form.find('ul').html('');
+                            // $form.find('.picture-preview-box').html('<img id="picture-preview-fengmian" src="" alt="">');
+                        }
                     },function(err){
                         console.log(err)
                     })
@@ -183,11 +210,37 @@ define(function (require, exports, module) {
                     }else {
                         t.keyWordArr.splice(idx,1);
                     }
-                    console.log(  t.keyWordArr );
-                   
+                });
+
+                common.bindEvent("change", "#addnews .fengmian-btn", function($this){
+                    var $file = $this;
+                    var fileObj = $file[0];
+                    var windowURL = window.URL || window.webkitURL;
+                    var dataURL;
+                    var $img = $("#picture-preview-fengmian");
+                    if(fileObj && fileObj.files && fileObj.files[0]){
+                        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+                        $img.attr('src',dataURL);
+                    }else{
+                        dataURL = $file.val();
+                        var imgObj = document.getElementById("picture-preview-fengmian");
+                        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+                    }
+                    $img.cropper({
+                        aspectRatio: 1.611/1,         //1 / 1,  //图片比例,1:1
+                        autoCropArea: 1,
+                        cropBoxResizable:false,
+                        cropBoxMovable:false,//是否拖动裁剪框
+                        dragMode: 'move',
+                        restore: false,
+                        guides:false
+                    });
+                    $img.cropper('replace',dataURL);
                 });
 
             },
+            // 富文本的图片上传到服务器
             renderSummernote: function(){
                 $('#summernote').summernote({
                     minHeight:300,
@@ -218,7 +271,7 @@ define(function (require, exports, module) {
                         } 
                     }
                 });
-            }
-        }).init(opt)
+            },
+        }).init(opt);
     }
 });

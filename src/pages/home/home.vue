@@ -638,7 +638,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    this.getNewsList();
+  },
   directives: {
     renderEcharts:{
       inserted(el,binding){
@@ -687,6 +689,12 @@ export default {
     },
     tapActivity(i){
        this.activityData.curIdx = i
+    },
+    getNewsList(){
+      this.$fetch('queryarticle.php')
+      .then((response) => {
+        console.log(response)
+      })
     }
   },
   components: {
