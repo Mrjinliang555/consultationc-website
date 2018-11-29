@@ -3,7 +3,7 @@
     <div class="header">
       <div class="news-flash">
         <div class="right-part fr">
-          简体中文
+          我知道了
         </div>
         <div class="news-swiper-container">
          <swiper :options="swiperOption">

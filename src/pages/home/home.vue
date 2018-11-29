@@ -25,7 +25,7 @@
                   <div class="swiper-img">
                       <swiper :options="bannerOption">
                           <swiper-slide v-for="(v,i) in bannerList.swiper" :key="i">
-                            <img :src="v.link" alt="">
+                            <img :src="v.imgsrc | getFullImgUrl" alt="">
                           </swiper-slide>
                       </swiper>
                   </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="news-nav clearfix">
                   <ul>
-                    <li v-on:click="tabNav(i)" :class="i===newsNavData.curIdx?'active':''" v-for="(v,i) in newsNavData.arr" :key="i">{{v}}</li>
+                    <li v-on:click="tabNav(i,v.type)" :class="i===newsNavData.curIdx?'active':''" v-for="(v,i) in newsNavData.arr" :key="v.id">{{v.name}}</li>
                   </ul>
                 </div>
                 <div class="content">
@@ -364,32 +364,7 @@ export default {
       ],
       // 轮播图数据
       bannerList : {
-        swiper: [
-          {
-            link: require('../../assets/images/1244581.png')
-          },
-          {
-            link: require('../../assets/images/1249704.jpg')
-          },
-          {
-            link: require('../../assets/images/1254693.jpg')
-          },
-          {
-            link: require('../../assets/images/1255881.png')
-          },
-          {
-            link: require('../../assets/images/1255973.jpg')
-          },
-          {
-            link: require('../../assets/images/1256588.jpg')
-          },
-          {
-            link: require('../../assets/images/1261175.jpg')
-          },
-          {
-            link: require('../../assets/images/1263330.jpg')
-          }
-        ],
+        swiper: [],
         static : [
          {link: require('../../assets/images/1228618.png')} ,
          {link: require('../../assets/images/1248368.jpg')}
@@ -397,90 +372,9 @@ export default {
       },
       newsNavData: {
         curIdx: 0,
-        arr: ['头条','新闻','政策','人物','行情','引用','投研','技术','百科']
+        arr: []
       },
-      nwesList: [
-        {
-          img: require('../../assets/images/1159955_small.jpg'),
-          title: '比特币十周年 | 最自由的货币与最曲折的监管',
-          txt:'自2008年中本聪第一次发布比特币白皮书以来，已经有十年的时间，这十年之间比特币价格的每一次波动都牵动着市场投资者的心，价格剧烈波动的背后，各国政策是怎样变化的？',
-          creatTime: '1538697600000',
-          auther: '扎NGSAN',
-          vews: 12344,
-          extension: 1,
-          sole: 1
-        },
-        {
-          img: require('../../assets/images/1266315_small.jpg'),
-          title: '游戏新经济的开创者',
-          txt: '你是否愿意同我们一道，一起迎接财富自由浪潮的到来呢？',
-          creatTime: '1540865103019',
-          auther: '相爱乡亲',
-          vews: 12344,
-          extension: 0,
-          sole: 0
-        },
-        {
-          img: require('../../assets/images/1267656_small.jpg'),
-          title: '知名律所Morgan Lewis＆Blockius发布欧美加密货币市场监管报告莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
-          txt: 'Morgan Lewis＆Blockius律师事务所认为全球各国政府也都在努力跟上金融技术创新发展的节奏，但市场上的加密货币监管法规仍然需要不断审查、更新和监督。',
-          creatTime: '1540865103019',
-          auther: '不是江湖人',
-          vews: 12344,
-          extension: 0,
-          sole: 0
-        },
-        {
-          img: require('../../assets/images/1268012_small.jpg'),
-          title: '莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
-          txt: '法院要求Telegram停止提供消息发送和接收服务，直到他们能够履行俄罗斯监管法律义务、提供解密密钥为止。',
-          creatTime: '1540865103019',
-          auther: 'jason',
-          vews: 12344,
-          extension: 0,
-          sole: 0
-        },
-        {
-          img: require('../../assets/images/1159955_small.jpg'),
-          title: '比特币十周年 | 最自由的货币与最曲折的监管',
-          txt:'自2008年中本聪第一次发布比特币白皮书以来，已经有十年的时间，这十年之间比特币价格的每一次波动都牵动着市场投资者的心，价格剧烈波动的背后，各国政策是怎样变化的？',
-          creatTime: '1540865103019',
-          auther: '扎NGSAN',
-          vews: 12344,
-          extension: 1,
-          sole: 1
-        },
-        {
-          img: require('../../assets/images/1266315_small.jpg'),
-          title: '游戏新经济的开创者',
-          txt: '你是否愿意同我们一道，一起迎接财富自由浪潮的到来呢？',
-          creatTime: '1540865103019',
-          auther: '相爱乡亲',
-          vews: 12344,
-          extension: 0,
-          sole: 0
-        },
-        {
-          img: require('../../assets/images/1267656_small.jpg'),
-          title: '知名律所Morgan Lewis＆Blockius发布欧美加密货币市场监管报告莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
-          txt: 'Morgan Lewis＆Blockius律师事务所认为全球各国政府也都在努力跟上金融技术创新发展的节奏，但市场上的加密货币监管法规仍然需要不断审查、更新和监督。',
-          creatTime: '1540865103019',
-          auther: '不是江湖人',
-          vews: 12344,
-          extension: 0,
-          sole: 0
-        },
-        {
-          img: require('../../assets/images/1268012_small.jpg'),
-          title: '莫斯科市法院驳回Telegram恢复业务上诉 坚持要求其提供解密密钥',
-          txt: '法院要求Telegram停止提供消息发送和接收服务，直到他们能够履行俄罗斯监管法律义务、提供解密密钥为止。',
-          creatTime: '1540865103019',
-          auther: 'jason',
-          vews: 12344,
-          extension: 0,
-          sole: 0
-        }
-      ],
+      nwesList: [],
       // 快讯动态
       dynamicData: {
         tapIdx: 1,
@@ -639,7 +533,9 @@ export default {
     };
   },
   created() {
+    this.getCategoryList();
     this.getNewsList();
+    this.getBannerList();
   },
   directives: {
     renderEcharts:{
@@ -692,8 +588,30 @@ export default {
     },
     getNewsList(){
       this.$fetch('queryarticle.php')
-      .then((response) => {
-        console.log(response)
+      .then((res) => {
+        console.log(res);
+        if( res.code == "000" ){
+          this.nwesList = res.data;
+        }
+      })
+    },
+    getCategoryList(){
+      // let _t = this
+      this.$fetch('querycategory.php')
+      .then((res) => {
+        console.log(res)
+        if( res.code === "000" ){
+          this.newsNavData.arr = res.data;
+        }
+      })
+    },
+    getBannerList(){
+      this.$fetch('select.php?index=0')
+      .then((res)=>{
+        console.log( res );
+        if( res.code === "000" ){
+          this.bannerList.swiper = res.data;
+        }
       })
     }
   },

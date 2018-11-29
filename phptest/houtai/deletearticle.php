@@ -1,21 +1,18 @@
 <?php 
 
-
 include_once './fn.php';
+
 $responseStasus = "222";
-$responseMsg = "暂无数据";
+$responseMsg = "删除失败";
 $responseDate = null;
 
-$nowTime = @time();
+$id = $_GET["id"];
 
-$sql ="SELECT * FROM t_article where creatTime<$nowTime and effectiveTime>$nowTime and status='1'"; 
-
-$res = my_query( $sql );
-
+$sql = "delete from t_article where id = $id";
+$res = my_exec($sql);
 if( $res ) {
-    $responseDate = $res;
     $responseStasus = "000";
-    $responseMsg = "查询成功";
+    $responseMsg = "删除成功";
 }
 
 $responseInof = array('code' => $responseStasus ,'msg'=> $responseMsg, 'data' => $responseDate );

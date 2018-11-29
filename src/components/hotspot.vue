@@ -1,19 +1,19 @@
 <template>
     <div class="container">
         <div class="imp-part">
-            <a href=""><img :src="item.img" alt=""></a>
+            <a href=""><img :src="item.coverImg | getFullImgUrl" alt=""></a>
         </div>
         <div class="text-part">
             <h2 class="two-line"><a class="add-hover" href="">{{item.title}}</a></h2>
-            <p class="three-line">{{item.txt}}</p>
+            <p class="three-line">{{item.abstract}}</p>
             <div class="info">
                 <div class="fl">
-                    <em v-if="isTop==1">置顶</em>
-                    <span><a class="add-hover" href="">{{item.auther + ' · ' }}{{item.creatTime  | formatData}}</a></span>
+                    <em v-show="item.isTop==1">置顶</em>
+                    <span><a class="add-hover" href="">{{item.author + ' · ' }}{{item.creatTime  | formatData}}</a></span>
                 </div>
                 <div class="fr">
                     <i class="iconfont icon-yanjing"></i>
-                    <span>{{item.vews}}</span>
+                    <span>{{item.readingVolume}}</span>
                     <em v-if="item.extension==1">推广</em>
                 </div>
             </div>

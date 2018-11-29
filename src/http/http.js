@@ -2,7 +2,7 @@ import axios from 'axios';
 // import { Message } from 'element-ui';
 
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL ='http://localhost/mynameisljl/consultationc-website/phptest/qianduan/';
+axios.defaults.baseURL ='/api/';
 
 
 //http request 拦截器

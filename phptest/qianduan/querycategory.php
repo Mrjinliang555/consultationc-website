@@ -6,9 +6,8 @@ $responseStasus = "222";
 $responseMsg = "暂无数据";
 $responseDate = null;
 
-$nowTime = @time();
 
-$sql ="SELECT * FROM t_article where creatTime<$nowTime and effectiveTime>$nowTime and status='1'"; 
+$sql ="SELECT * FROM t_news_classification"; 
 
 $res = my_query( $sql );
 

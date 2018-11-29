@@ -85,6 +85,54 @@ common.confirm = function (params) {
     });
 };
 
+common.formatTime = function(val,flag){
+
+    if( val == '2147483647' ){
+        return '永久'
+    }
+
+    if( val.length === 10 ){
+        val = val + '000';
+    }
+
+    var date = new Date( +val );
+    var y = date.getFullYear();
+    var m = addZero(date.getMonth() + 1);
+    var d = addZero(date.getDate());
+    var h = addZero(date.getHours());
+    var min = addZero(date.getMinutes());
+    if( flag ) return ( y + '-' + m + '-' + d );
+    return ( y + '-' + m + '-' + d + ' ' + h + ":" + min );
+
+    function addZero(num){
+        return num < 10 ? ('0'+num):num;
+    }
+
+}
+
+common.formatT2 = function(val,flag){
+
+    if( val.trim().length === 0 ) return "";
+
+    if( val.length === 10 ){
+        val = val + '000';
+    }
+
+    var date = new Date( +val );
+    var y = date.getFullYear();
+    var m = addZero(date.getMonth() + 1);
+    var d = addZero(date.getDate());
+    var h = addZero(date.getHours());
+    var min = addZero(date.getMinutes());
+    var sec = addZero(date.getSeconds());
+    if( flag ) return ( y + '-' + m + '-' + d );
+    return (h + ":" + min + ":" + sec);
+
+    function addZero(num){
+        return num < 10 ? ('0'+num):num;
+    }
+
+}
 
 common.getRandomCode = function () {
     var date = new Date();
@@ -486,6 +534,10 @@ common.getArrIndexByProps = function (arr, propsKey, propsVal) {
     return rIndex;
 }
 
+common.addUrlStr = function(val){
+    return '../../../phptest/upload/' + val;
+}
+
 
 $.fn.scrollTo = function (options) {
     var defaults = {
@@ -520,6 +572,7 @@ $.fn.scrollTo = function (options) {
     }, opts.delay);
     return _this;
 };
+
 
 
 

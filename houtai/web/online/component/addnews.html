@@ -3,37 +3,39 @@
         <form>
             <button class="close-btn remove-btn"><i class="glyphicon glyphicon-remove"></i></button>
             <div class="ui-form-row">
-                <span class="loop">文章标题</span><input style="width:75%" class="ordinary" type="text" name="title">
+                <span class="loop">文章标题</span><input style="width:75%" value="{{=it.info && it.info.title||''}}" class="ordinary" type="text" name="title">
             </div>
             <div class="long">
                 <div class="ui-form-row custom">
                     <span class="loop">原创内容</span>
-                    <input type="radio" name="only" value="0">否
-                    <input type="radio" name="only" value="1" checked>是
+                    <input type="radio" name="only" value="0" {{=it.info && it.info.only == 0?'checked': ''}}>否
+                    <input type="radio" name="only" value="1" {{=it.info && it.info.only == 0?'': 'checked'}}>是
                 </div>
                 <div class="ui-form-row custom">
                     <span class="loop">文章状态</span>
-                    <input type="radio" name="status" value="0">草稿
-                    <input type="radio" name="status" value="1" checked>已发布
+                    <input type="radio" name="status" value="0" {{=(it.info && it.info.status == 0?'checked': '')}}>草稿
+                    <input type="radio" name="status" value="1" {{=(it.info && it.info.status == 0?'': 'checked')}}>已发布
                 </div>
             </div>
             
-            <div class="ui-form-row hide" id="source">
-                <span class="loop">文章来源</span><input class="ordinary" name="source" placeholder="请输入文章来源" type="text">
+            <div class="{{=it.info&&it.info.only==0?'ui-form-row':'ui-form-row hide'}}" id="source">
+                <span class="loop">文章来源</span><input class="ordinary" value="{{=it.info&&it.info.source}}" name="source" placeholder="请输入文章来源" type="text">
             </div>
             
             <div class="long">
                 <div class="ui-form-row">
                     <span class="loop">所属分类</span>
                     <select name="category" id="">
-                        <option disabled selected>请选择分类</option>
+                        <option disabled {{=it.info&&it.info.category?'':'selected'}}>请选择分类</option>
                         {{~it.newsList :val:idx}}
-                        <option value="{{=val.type}}">{{=val.name}}</option>
+                        <option value="{{=val.type}}" {{=it.info&&(it.info.category==val.type)?'selected':''}}>{{=val.name}}</option>
                         {{~}}
                     </select>
                 </div>
                 <div class="ui-form-row">
-                    <span class="loop">有效时间</span><input class="ordinary" placeholder="永久有效" id="effectiveTime" type="text">
+                    <span class="loop">有效时间</span>
+                    <input class="ordinary" value="{{=it.info&&(it.info.effectiveTime!='2147483647')?common.formatTime(it.info.effectiveTime,true):''}}" 
+                    placeholder="永久有效" id="effectiveTime" type="text">
                 </div> 
             </div>
 
@@ -46,33 +48,50 @@
                     <input type="text"><button class="add-keyword-btn btn btn-success">添加</button>
                 </div>
                 <ul class="keyword-box">
+                    {{? it.info && it.info.keyWord}}
+                        {{~it.info.keyWord :val}}
+                             <li><span>{{=val}}</span><em>x</em></li>
+                        {{~}}
+                    {{?}}
                 </ul>
             </div>
 
-            <div class="ui-form-row custom">
-                <span class="loop">置顶</span>
-                <input type="radio" name="istop" value="0" checked>否
-                <input type="radio" name="istop" value="1">是
+            <div class="long">
+                <div class="ui-form-row custom">
+                    <span class="loop">置顶</span>
+                    <input type="radio" name="istop" value="0" {{=it.info && it.info.isTop == 1?'': 'checked'}}>否
+                    <input type="radio" name="istop" value="1" {{=it.info && it.info.isTop == 1?'checked': ''}}>是
+                </div>
+                <div class="ui-form-row custom">
+                    <span class="loop">推广</span>
+                    <input type="radio" name="extension" value="0" {{=it.info && it.info.extension == 1?'': 'checked'}}>否
+                    <input type="radio" name="extension" value="1" {{=it.info && it.info.extension == 1?'checked': ''}}>是
+                </div>
             </div>
 
             <div class="fengmian-container">
                 <button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 上传封面图片</button>
                 <input class="fengmian-btn" type="file" accept="image/jpg,image/jpeg,image/png" name="file">
                 <div class="picture-preview-box">
-                    <img id="picture-preview-fengmian" src="" alt="">
+                    <img id="picture-preview-fengmian"
+                    src="{{=it.info && it.info.coverImg?('../../../phptest/upload/'+it.info.coverImg):''}}">
                 </div>
             </div>
-
-            <div id="summernote">编辑内容</div>
+            <div class="abstract-box">
+                <p>文章摘要:</p>
+                <textarea name="" id="abstract" value="">{{=it.info&&it.info.abstract||''}}</textarea>
+                <p class="page txt-r"><span>{{=it.info&&it.info.abstract.length||''}}</span>/200</p>
+            </div>
+            <div id="summernote">{{=it.info && it.info.content||'编辑内容'}}</div>
             <div class="btns clearfix">
                 <button class="btn btn-default fl remove-btn">取消</button>
-                <button class="btn btn-success btn-release fr">发布</button>
+                <button data-id="{{=it.info&&it.info.id|''}}" data-crearttime="{{=it.info&&it.info.isTiming=='false'?it.info.creatTime:''}}" class="btn btn-success btn-release fr">发布</button>
                 <div class="fr set-time-btns">
-                    定时发布<input type="checkbox">
+                    定时发布<input type="checkbox" {{=it.info&&it.info.isTiming=='true'?'checked':''}}>
                 </div>
-                <div id="set-time-item" class="fr set-time-btns hide">
-                    日期<input class="set-time-hour" id="effectiveTimeOfData" type="text">
-                    时间<input class="set-time-date" id="effectiveTimeOfHour" type="text" value="">
+                <div id="set-time-item" class="fr set-time-btns {{=it.info&&it.info.isTiming=='true'?'':'hide'}}">
+                    日期<input class="set-time-hour" value="{{=it.info&&it.info.isTiming=='true'?common.formatT2(it.info.creatTime,true):''}}" id="effectiveTimeOfData" type="text">
+                    时间<input class="set-time-date" id="effectiveTimeOfHour" type="text" value="{{=it.info&&it.info.isTiming=='true'?common.formatT2(it.info.creatTime):''}}">
                 </div>
             </div>
         </form>    

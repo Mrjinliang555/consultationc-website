@@ -16,7 +16,7 @@
                     <td width="15%">{{=value.link}}</td>
                     <td width="15%">{{=value.title}}</td>
                     <td width="20%">
-                        <img src="{{='/xt-website/consultationc-website/phptest/upload/' + value.imgsrc}}" alt="">
+                        <img src="{{=common.addUrlStr(value.imgsrc)}}" alt="">
                     </td>
                     <td width="12%" data-id="{{=value.id}}">
                         <button  type="button" class="btn btn-primary" >编辑</button>
